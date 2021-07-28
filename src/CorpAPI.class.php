@@ -10,7 +10,8 @@
      */
 namespace WeWork;
 
-use http\Exception;
+use CURLFile;
+use Exception;
 use WeWork\Api\API;
 use WeWork\DataStructure\Agent;
 use WeWork\DataStructure\ApprovalDataList;
@@ -35,6 +36,7 @@ use WeWork\DataStructure\UserInfoByCode;
 use WeWork\Utils\HttpUtils;
 use WeWork\Utils\ParameterError;
 use WeWork\Utils\QyApiError;
+use WeWork\utils\redisCache;
 use WeWork\Utils\SysError;
 use WeWork\Utils\Utils;
 //
@@ -67,6 +69,10 @@ class CorpAPI extends API
     private $secret = null;
     protected $accessToken = null;
     private $rspRawStr = null;
+    /**
+     * @var array
+     */
+    private $redisConfig;
 
     /**
      * @brief __construct : 构造函数，
@@ -75,26 +81,46 @@ class CorpAPI extends API
      * @param null $secret
      * @throws ParameterError
      */
-    public function __construct($corpId=null, $secret=null)
+    public function __construct($corpId=null, $secret=null, array $redisconfig=[])
     {
         Utils::checkNotEmptyStr($corpId, "corpid");
         Utils::checkNotEmptyStr($secret, "secret");
 
         $this->corpId = $corpId;
         $this->secret = $secret;
+        $this->redisConfig = $redisconfig;
     }
 
 
     // ------------------------- access token ---------------------------------
+    //刷新access_token，改造原来的方式
+    private function getAccessTokenFromRedis()
+    {
+        $redis = new redisCache($this->redisConfig);
+        $access_token = $redis->get('access_token|'.$this->corpId);	//读取缓存
+        if (empty($access_token))
+        {
+            $url = HttpUtils::MakeUrl(
+                "/cgi-bin/gettoken?corpid={$this->corpId}&corpsecret={$this->secret}");
+            $this->_HttpGetParseToJson($url, false);
+            $this->_CheckErrCode();
+            $access_token = $this->rspJson["access_token"];
+            $redis->set('access_token|'.$this->corpId, $access_token, 7000);
+        }
+        $this->accessToken = $access_token;
+        return $this->accessToken;
+    }
 
     /**
      * @brief GetAccessToken : 获取 accesstoken，不用主动调用
      * @return null : string accessToken
      * @throws ParameterError
-
      */
     protected function GetAccessToken()
     {
+        if(!empty($this->redisConfig)){
+            return $this->accessToken = $this->getAccessTokenFromRedis();
+        }
         if ( ! Utils::notEmptyStr($this->accessToken)) { 
             $this->RefreshAccessToken();
         } 
@@ -103,19 +129,22 @@ class CorpAPI extends API
 
     /**
      * @throws ParameterError
-
      */
     protected function RefreshAccessToken()
     {
         if (!Utils::notEmptyStr($this->corpId) || !Utils::notEmptyStr($this->secret))
             throw new ParameterError("invalid corpid or secret");
 
-        $url = HttpUtils::MakeUrl(
-            "/cgi-bin/gettoken?corpid={$this->corpId}&corpsecret={$this->secret}");
-        $this->_HttpGetParseToJson($url, false);
-        $this->_CheckErrCode();
+        if (empty($this->redisConfig)) {
+            $url = HttpUtils::MakeUrl(
+                "/cgi-bin/gettoken?corpid={$this->corpId}&corpsecret={$this->secret}");
+            $this->_HttpGetParseToJson($url, false);
+            $this->_CheckErrCode();
+            $this->accessToken = $this->rspJson["access_token"];
+        }else{
+            $this->accessToken = $this->getAccessTokenFromRedis();
+        }
 
-        $this->accessToken = $this->rspJson["access_token"];
     }
 
     // ------------------------- 成员管理 -------------------------------------
@@ -667,7 +696,7 @@ class CorpAPI extends API
 
         // 兼容php5.3-5.6 curl模块的上传操作
         if (class_exists('\CURLFile')) {
-            $args = array('media' => new \CURLFile(realpath($filePath), 'application/octet-stream', basename($filePath)));
+            $args = array('media' => new CURLFile(realpath($filePath), 'application/octet-stream', basename($filePath)));
         } else {
             $args = array('media' => '@' . realpath($filePath));
         }
@@ -699,8 +728,6 @@ class CorpAPI extends API
         catch (Exception $ex) {
             unlink($tmpPath);
             throw $ex;
-        } catch (ParameterError $e) {
-        } catch (QyApiError $e) {
         }
     }
 
@@ -710,7 +737,6 @@ class CorpAPI extends API
      * @param $media_id : string
      * @return null : string
      * @throws ParameterError
-
      */
     public function MediaGet($media_id)
     {
@@ -736,9 +762,9 @@ class CorpAPI extends API
         }
 
         // 兼容php5.3-5.6 curl模块的上传操作
-        $args = array();
+//        $args = array();
         if (class_exists('\CURLFile')) {
-            $args = array('media' => new \CURLFile(realpath($filePath), 'application/octet-stream', basename($filePath)));
+            $args = array('media' => new CURLFile(realpath($filePath), 'application/octet-stream', basename($filePath)));
         } else {
             $args = array('media' => '@' . $filePath);//realpath($filePath));
         }
@@ -752,7 +778,6 @@ class CorpAPI extends API
 
         $this->_HttpPostParseToJson($url, $args, true, true/*isPostFile*/);
         $this->_CheckErrCode();
-
         return $this->rspJson["url"];
     }
 

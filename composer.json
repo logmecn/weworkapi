@@ -21,7 +21,7 @@
     "php": ">=7.1",
     "ext-json": "*",
     "ext-curl": "*",
-    "ext-http": "*"
+    "ext-redis": "*"
   },
   "autoload": {
     "psr-4": {

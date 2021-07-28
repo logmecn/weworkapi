@@ -31,4 +31,13 @@ return array (
     // 点进去，有个"api"按钮，点开后，会看到
     "APPROVAL_APP_ID"       => 3010040,
     "APPROVAL_APP_SECRET"   => "1vrlwItWpz_5Qkud55aImQPCvpzi51H3F2j-1OQzhYE",
+
+    "redis" => [
+        'host'=> '127.0.0.1',
+        'port' => 6379,
+        'timeout' => 7000,
+        'auth' => 'auth@logme',
+        'db' => 0,
+        'prefix' => 'qywx_'
+    ]
 );

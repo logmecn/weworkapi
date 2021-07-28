@@ -9,12 +9,70 @@
     * MarkDown消息发送；
     * 小程序消息发送；
     * 任务卡片消息发送（需要企业微信应用有回调功能支持）；
-1. 待处理（使用Redis缓存。在 config 文件中修改配置。）
+1. 增加使用Redis缓存。在 config 文件中修改配置。
 
 本项目着重*重构了 composer 功能*，可使用 comopser update 添加到自己的项目中。
 
 后续会继续增加丰富其功能。
 
+### composer 安装方法：
+composer require logmecn/weworkapi
+
+或在 require 中添加以下，并执行 composer update
+```$xslt
+"logmecn/weworkapi":  "dev-master"
+```
+
+### Phalapi 框架的使用方法建议：
+1. 配置文件：在 config/app.php 中增加企业微信相关的配置。比如：
+    ```php
+    return [
+       'qywx'=>['corpid'=>'','agentId'=>'','secret'=>'']
+    ];
+    ```
+2. 使用composer更新了代码后，在 Api/Site.php 中使用：
+    ```php
+       use Phalapi\API;
+       use WeWork\CorpAPI;
+       use WeWork\Utils\ParameterError;
+       class Qywx extends API{
+       public function Sendmsg(){
+           $config = DI()->config->get("app.qywx");
+           try {
+               $api = new CorpAPI($config['corpid'], $config['secret']);
+           } catch (ParameterError $e) {
+               echo $e->getMessage() . "\n";
+           }
+           $user = $api->UserGet("userid");
+           var_dump($user);
+           //
+           $user->mobile = "1219887219873";
+           $api->UserUpdate($user); 
+       }
+   }
+    ```
+
+### 使用ThinkPHP的扩展更新示例：
+1. 用 comopser 添加 "logmecn/weworkapi" 
+1. 在config 中添加企业微信对应 的配置；
+1. 在 application 对应的文件中，使用类似上面Phalapi的方法。
+
+## 使用企业微信时注意以下几个概念：
+1. 留意几个id： 
+    * corpid ： 企业id，用于识别企业的唯一性。在 https://work.weixin.qq.com/wework_admin 扫码登录企业微信管理后台后， “我的企业、企业ID”获取。
+    * agentid： 应用的id，是在企业微信管理后台的“应用管理、应用”中获取
+    * appid： 企业微信中的应用，如果使用了小程序，则会有小程序的appid
+    * userid： 使用企业微信接口获取到的用户唯一id标识。
+1. 留意几个secret：
+    * 通讯录secret：在企业微信管理后台的“管理工具、通讯录同步”中，可设置回调地址和密钥。
+    * 应用 secret：对应上面应用中的 agentid 下面一行的secret
+    * 客户群 secret：在企业微信管理后台的“客户工具、客户”右边，有一个API，点进去可查看到。
+    * 会话存档密钥：在“管理工具、会话内容存档”中按提示设置。可以使用 open_ssl 生成一个公钥发给企业微信，生成的密钥放在服务器上对接收信息解密。
+1. 关联企业和企业互联：这是两个不同的概念，不要混淆。
+    * 关联企业：新添加的关联企业功能，需要有另外一个企业微信做设置。
+通讯录之间没有上下级关系，是同级的。
+    * 企业互联：两个不同的企业通讯录，有上下级关系。
+    
 # 以下原说明
 weworkapi_php 是为了简化开发者对企业微信API接口的使用而设计的，API调用库系列之php版本    
 包括企业API接口、消息回调处理方法、第三方开放接口等    
