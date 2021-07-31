@@ -8,6 +8,7 @@
  * 在企业微信管理后台，通讯录、互联企业，点其中一个互联企业，
  */
 
+//use WeWork\CorpAPI;
 use WeWork\DataStructure\Link_Message;
 use WeWork\DataStructure\NewsArticle;
 use WeWork\DataStructure\NewsMessageContent;
@@ -20,7 +21,7 @@ $config = require(__DIR__ . "/config_link.php");
 //use LinkAPI;
 //$config = require('./config.php');
 try {
-    $api = new LinkAPI($config['corpid'], $config['sec']);
+    $api = new LinkAPI($config['CORP_ID'], $config['CONTACT_SYNC_SECRET']);
 } catch (ParameterError $e) {
     echo $e->getMessage() . "\n";
 }

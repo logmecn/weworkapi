@@ -1,12 +1,13 @@
 <?php
 namespace WeWork;
+
 use WeWork\DataStructure\Link_Message;
 use WeWork\DataStructure\User;
 use WeWork\Utils\ParameterError;
 use WeWork\Utils\Utils;
 
-//include_once(__DIR__ . "/api/datastructure/Link_Message.class.php");
-//include_once("CorpAPI.class.php");
+include_once(__DIR__ . "/datastructure/Link_Message.class.php");
+include_once("CorpAPI.class.php");
 
 class LinkAPI extends CorpAPI {
 
@@ -30,7 +31,8 @@ class LinkAPI extends CorpAPI {
      * @desc 仅自建应用可调用。本接口只返回互联企业中非本企业内的成员和部门的信息，如果要获取本企业的可见范围，请调用“获取应用”接口
      * @link https://work.weixin.qq.com/api/doc/90000/90135/93172
      * @return array userids 示例："userids": ["CORPID/USERID"],
-     * @return array department_ids 示例： "department_ids":["LINKEDID/DEPARTMENTID"]
+     * @throws ParameterError
+     * @throws Utils\QyApiError
      */
     public function LinkGetPermList(){
         self::_HttpCall(self::Link_Get_Perm_List, 'POST', '');

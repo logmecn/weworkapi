@@ -1,9 +1,14 @@
 <?php
-namespace WeWork\Api;
+namespace WeWork;
 //
-//include_once(__DIR__."/../../utils/Utils.class.php");
-//include_once(__DIR__."/../../utils/HttpUtils.class.php");
-//include_once(__DIR__."/../../utils/error.inc.php");
+use WeWork\Utils\HttpUtils;
+use WeWork\Utils\ParameterError;
+use WeWork\Utils\QyApiError;
+use WeWork\Utils\Utils;
+
+include_once(__DIR__."/../utils/Utils.class.php");
+include_once(__DIR__."/../utils/HttpUtils.class.php");
+include_once(__DIR__."/../utils/error.inc.php");
 
 abstract class API
 {
@@ -88,6 +93,13 @@ abstract class API
     protected function GetProviderAccessToken() { }
     protected function RefreshProviderAccessToken() { }
 
+    /**
+     * @param $url
+     * @param $method
+     * @param $args
+     * @throws QyApiError
+     * @throws ParameterError
+     */
     protected function _HttpCall($url, $method, $args)
     {
         if ('POST' == $method) { 
@@ -113,6 +125,12 @@ abstract class API
         }
     }
 
+    /**
+     * @param $url
+     * @param bool $refreshTokenWhenExpired
+     * @return Utils\http
+     * @throws QyApiError
+     */
     protected function _HttpGetParseToJson($url, $refreshTokenWhenExpired=true)
     {
         $retryCnt = 0;
@@ -164,6 +182,14 @@ abstract class API
         }
     }
 
+    /**
+     * @param $url
+     * @param $args
+     * @param bool $refreshTokenWhenExpired
+     * @param bool $isPostFile
+     * @return mixed
+     * @throws QyApiError
+     */
     protected function _HttpPostParseToJson($url, $args, $refreshTokenWhenExpired=true, $isPostFile=false)
     {
         $postData = $args;
@@ -220,9 +246,13 @@ abstract class API
 
             return $json;
         }
-    } 
+    }
 
 
+    /**
+     * @throws QyApiError
+     * @throws ParameterError
+     */
     protected function _CheckErrCode()
     {
         $rsp = $this->rspJson;

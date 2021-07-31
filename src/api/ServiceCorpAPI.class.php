@@ -18,13 +18,15 @@ use WeWork\DataStructure\GetUserDetailBy3rdRsp;
 use WeWork\DataStructure\GetUserinfoBy3rdRsp;
 use WeWork\DataStructure\SetSessionInfoReq;
 use WeWork\Utils\HttpUtils;
+use WeWork\Utils\ParameterError;
+use WeWork\Utils\QyApiError;
 use WeWork\Utils\Utils;
 
-//include_once(__DIR__ . "/../utils/Utils.class.php");
-//include_once(__DIR__ . "/../utils/HttpUtils.class.php");
-//include_once(__DIR__ . "/../utils/error.inc.php");
-//include_once(__DIR__ . "/datastructure/ServiceCorp.class.php");
-//include_once(__DIR__ . "/API.class.php");
+include_once(__DIR__ . "/../utils/Utils.class.php");
+include_once(__DIR__ . "/../utils/HttpUtils.class.php");
+include_once(__DIR__ . "/../utils/error.inc.php");
+include_once(__DIR__ . "/datastructure/ServiceCorp.class.php");
+include_once(__DIR__ . "/API.class.php");
 
 class ServiceCorpAPI extends CorpAPI 
 {
@@ -35,7 +37,7 @@ class ServiceCorpAPI extends CorpAPI
     private $authCorpId = null; // string 
     private $permanentCode = null; // string 
 
-    private $suiteAccessToken = null; // string
+    private $suiteAccessToken = ""; // string
 
     public function __construct(
         $suite_id=null, 
@@ -56,8 +58,9 @@ class ServiceCorpAPI extends CorpAPI
     /**
      * @brief RefreshAccessToken : override CorpAPI的函数，使用三方服务商的get_corp_token
      *
-     * @return : string
-     * @throws \WeWork\Utils\ParameterError
+     * @return void : string
+     * @throws ParameterError
+     * @throws QyApiError
      */
     protected function RefreshAccessToken()
     {
@@ -81,15 +84,22 @@ class ServiceCorpAPI extends CorpAPI
      *
      * @note 调用者不用关心，本类会自动获取、更新
      *
-     * @return : string
+     * @return  string
+     * @throws ParameterError
+     * @throws QyApiError
      */
     protected function GetSuiteAccessToken()
     { 
-        if ( ! Utils::notEmptyStr($this->suiteAccessToken)) { 
+        if ( ! Utils::notEmptyStr($this->suiteAccessToken)) {
             $this->RefreshSuiteAccessToken();
         } 
         return $this->suiteAccessToken;
     }
+
+    /**
+     * @throws ParameterError
+     * @throws QyApiError
+     */
     protected function RefreshSuiteAccessToken()
     {
         Utils::checkNotEmptyStr($this->suite_id, "suite_id");
@@ -113,22 +123,24 @@ class ServiceCorpAPI extends CorpAPI
     /**
      * @brief GetPreAuthCode : 获取预授权码
      *
-     * @link https://work.weixin.qq.com/api/doc#10975/获取预授权码
-     *
-     * @return  : string pre_auth_code
+     * @link https://work.weixin.qq.com/api/doc#10975/获取预授权
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function GetPreAuthCode()
     { 
         self::_HttpCall(self::GET_PRE_AUTH_CODE, 'GET', null); 
         return $this->rspJson["pre_auth_code"];
-    } 
+    }
 
     /**
      * @brief SetSessionInfo : 设置授权配置
      *
      * @link https://work.weixin.qq.com/api/doc#10975/设置授权配置
      *
-     * @param $SetSessionInfoReq
+     * @param SetSessionInfoReq $SetSessionInfoReq
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function SetSessionInfo(SetSessionInfoReq $SetSessionInfoReq)
     { 
@@ -143,7 +155,9 @@ class ServiceCorpAPI extends CorpAPI
      *
      * @param $temp_auth_code : string 临时授权码
      *
-     * @return : GetPermanentCodeRsp
+     * @return GetPermanentCodeRsp : GetPermanentCodeRsp
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function GetPermanentCode($temp_auth_code)
     { 
@@ -160,8 +174,9 @@ class ServiceCorpAPI extends CorpAPI
      * @param $auth_corpid : string
      * @param $permanent_code : 永久授权码
      *
-     * @return  : GetAuthInfoRsp
-     * @throws \WeWork\Utils\ParameterError
+     * @return GetAuthInfoRsp : GetAuthInfoRsp
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function GetAuthInfo($auth_corpid, $permanent_code)
     { 
@@ -183,8 +198,9 @@ class ServiceCorpAPI extends CorpAPI
      * @param $auth_corpid : string
      * @param $agentid : uint
      *
-     * @return  : GetAdminListRsp
-     * @throws \WeWork\Utils\ParameterError
+     * @return GetAdminListRsp : GetAdminListRsp
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function GetAdminList($auth_corpid, $agentid)
     { 
@@ -205,7 +221,9 @@ class ServiceCorpAPI extends CorpAPI
      *
      * @param $code : string
      *
-     * @return  : GetUserinfoBy3rdRsp
+     * @return GetUserinfoBy3rdRsp : GetUserinfoBy3rdRsp
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function GetUserinfoBy3rd($code)
     { 
@@ -220,8 +238,9 @@ class ServiceCorpAPI extends CorpAPI
      *
      * @param $user_ticket : string
      *
-     * @return  : GetUserDetailBy3rdRsp
-     * @throws \WeWork\Utils\ParameterError
+     * @return GetUserDetailBy3rdRsp : GetUserDetailBy3rdRsp
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function GetUserDetailBy3rd($user_ticket)
     { 

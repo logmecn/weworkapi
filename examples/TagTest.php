@@ -13,9 +13,9 @@ use WeWork\CorpAPI;
 use WeWork\DataStructure\Tag;
 use WeWork\Utils\ParameterError;
 
-include_once("../src/CorpAPI.class.php");
-include_once("../src/api/ServiceCorpAPI.class.php");
-include_once("../src/api/ServiceProviderAPI.class.php");
+//include_once("../src/CorpAPI.class.php");
+//include_once("../src/api/ServiceCorpAPI.class.php");
+//include_once("../src/api/ServiceProviderAPI.class.php");
 
 $config = require('./config.php');
 // 需启用 "管理工具" -> "通讯录同步", 并使用该处的secret, 才能通过API管理通讯录

@@ -1,5 +1,6 @@
 <?php
 namespace WeWork\DataStructure;
+use WeWork\Utils\ParameterError;
 use WeWork\Utils\Utils;
 
 include_once(__DIR__."/../../utils/Utils.class.php");
@@ -120,8 +121,12 @@ class GetRegisterCodeReq
     public $admin_mobile = null; // string
 
     public function FormatArgs()
-    { 
-        Utils::checkNotEmptyStr($this->template_id, "template_id");
+    {
+        try {
+            Utils::checkNotEmptyStr($this->template_id, "template_id");
+        } catch (ParameterError $e) {
+            return $e->getMessage();
+        }
 
         $args = array();
 

@@ -38,7 +38,7 @@ class Qywx
         if (empty($this->config))
             return 'corpId is empty';
         try {
-            $this->workApi = new CorpAPI($config['corpId'], $config['secretKey']);
+            $this->workApi = new CorpAPI($config['CORP_ID'], $config['CONTACT_SYNC_SECRET']);
         } catch (ParameterError $e) {
             echo ('初始化 WorkApi 失败，App/Common/Qywx.php: '. $e->getMessage());
             return 'Initial WorkApi failed!';

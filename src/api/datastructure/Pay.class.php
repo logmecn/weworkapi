@@ -1,6 +1,6 @@
 <?php
 namespace WeWork\DataStructure;
-//include_once(__DIR__."/../../utils/Utils.class.php");
+include_once(__DIR__."/../../utils/Utils.class.php");
 
 class SendWorkWxRedpackReq
 { 
