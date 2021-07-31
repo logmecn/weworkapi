@@ -1,12 +1,12 @@
 <?php
-namespace WeWork;
+namespace WeWorkApi;
 
-use WeWork\DataStructure\Link_Message;
-use WeWork\DataStructure\User;
-use WeWork\Utils\ParameterError;
-use WeWork\Utils\Utils;
+use WeWorkApi\DataStructure\Link_Message;
+use WeWorkApi\DataStructure\User;
+use WeWorkApi\Utils\ParameterError;
+use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/datastructure/Link_Message.class.php");
+include_once(__DIR__ . "/Api/Datastructure/Link_Message.class.php");
 include_once("CorpAPI.class.php");
 
 class LinkAPI extends CorpAPI {
@@ -33,6 +33,7 @@ class LinkAPI extends CorpAPI {
      * @return array userids 示例："userids": ["CORPID/USERID"],
      * @throws ParameterError
      * @throws Utils\QyApiError
+     * @throws \WeWorkApi\Utils\QyApiError
      */
     public function LinkGetPermList(){
         self::_HttpCall(self::Link_Get_Perm_List, 'POST', '');

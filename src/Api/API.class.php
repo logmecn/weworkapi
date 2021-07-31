@@ -1,14 +1,14 @@
 <?php
-namespace WeWork;
+namespace WeWorkApi\Api;
 //
-use WeWork\Utils\HttpUtils;
-use WeWork\Utils\ParameterError;
-use WeWork\Utils\QyApiError;
-use WeWork\Utils\Utils;
+use WeWorkApi\Utils\HttpUtils;
+use WeWorkApi\Utils\ParameterError;
+use WeWorkApi\Utils\QyApiError;
+use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__."/../utils/Utils.class.php");
-include_once(__DIR__."/../utils/HttpUtils.class.php");
-include_once(__DIR__."/../utils/error.inc.php");
+include_once(__DIR__ . "/../Utils/Utils.class.php");
+include_once(__DIR__ . "/../Utils/HttpUtils.class.php");
+include_once(__DIR__ . "/../Utils/error.inc.php");
 
 abstract class API
 {

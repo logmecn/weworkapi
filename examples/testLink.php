@@ -8,12 +8,12 @@
  * 在企业微信管理后台，通讯录、互联企业，点其中一个互联企业，
  */
 
-//use WeWork\CorpAPI;
-use WeWork\DataStructure\Link_Message;
-use WeWork\DataStructure\NewsArticle;
-use WeWork\DataStructure\NewsMessageContent;
-use WeWork\LinkAPI;
-use WeWork\Utils\ParameterError;
+//use WeWorkApi\CorpAPI;
+use WeWorkApi\DataStructure\Link_Message;
+use WeWorkApi\DataStructure\NewsArticle;
+use WeWorkApi\DataStructure\NewsMessageContent;
+use WeWorkApi\LinkAPI;
+use WeWorkApi\Utils\ParameterError;
 
 include_once(__DIR__ . "/../src/LinkAPI.class.php");
 $config = require(__DIR__ . "/config_link.php");

@@ -13,15 +13,15 @@ namespace App\Common;
 //include_once "../src/CorpAPI.class.php"; //互联企业用LinkAPI.class.php
 //include_once "../src/api/datastructure/MessageExt.class.php";
 
-use WeWork\CorpAPI;
+use WeWorkApi\CorpAPI;
 use Exception;
-use WeWork\DataStructure\MDMessageContent;
-use WeWork\DataStructure\Message;
-use WeWork\DataStructure\MinaMessageContent;
-use WeWork\DataStructure\NewsArticle;
-use WeWork\DataStructure\NewsMessageContent;
-use WeWork\Utils\ParameterError;
-use WeWork\DataStructure\TaskCardMessageContent;
+use WeWorkApi\DataStructure\MDMessageContent;
+use WeWorkApi\DataStructure\Message;
+use WeWorkApi\DataStructure\MinaMessageContent;
+use WeWorkApi\DataStructure\NewsArticle;
+use WeWorkApi\DataStructure\NewsMessageContent;
+use WeWorkApi\Utils\ParameterError;
+use WeWorkApi\DataStructure\TaskCardMessageContent;
 
 class Qywx
 {

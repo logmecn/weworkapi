@@ -1,5 +1,5 @@
 <?php
-namespace WeWork\Utils;
+namespace WeWorkApi\Utils;
 use Exception;
 
 class SysError extends Exception

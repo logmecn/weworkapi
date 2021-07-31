@@ -1,6 +1,6 @@
 <?php
 
-namespace WeWork\utils;
+namespace WeWorkApi\Utils;
 
 use Redis;
 

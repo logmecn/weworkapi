@@ -1,7 +1,7 @@
 <?php
-namespace WeWork\DataStructure;
-include_once(__DIR__."/../../utils/Utils.class.php");
-include_once(__DIR__."/../../utils/error.inc.php");
+namespace WeWorkApi\DataStructure;
+include_once(__DIR__ . "/../../Utils/Utils.class.php");
+include_once(__DIR__ . "/../../Utils/error.inc.php");
 
 class Menu { 
     public $button = null; // xxxMenu array, 即各种子菜单array

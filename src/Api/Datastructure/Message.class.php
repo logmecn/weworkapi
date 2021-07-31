@@ -1,7 +1,7 @@
 <?php
-namespace WeWork\DataStructure;
-include_once(__DIR__."/../../utils/error.inc.php");
-include_once(__DIR__."/../../utils/Utils.class.php");
+namespace WeWorkApi\DataStructure;
+include_once(__DIR__ . "/../../Utils/error.inc.php");
+include_once(__DIR__ . "/../../Utils/Utils.class.php");
 
 class Message 
 { 

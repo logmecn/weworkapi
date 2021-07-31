@@ -9,11 +9,11 @@
  *
  */
 
-use WeWork\CorpAPI;
+use WeWorkApi\CorpAPI;
 
 include_once("../src/CorpAPI.class.php");
-include_once("../src/api/ServiceCorpAPI.class.php");
-include_once("../src/api/ServiceProviderAPI.class.php");
+include_once("../src/Api/ServiceCorpAPI.class.php");
+include_once("../src/Api/ServiceProviderAPI.class.php");
 
 
 $config = require('./config.php');
@@ -21,7 +21,7 @@ $config = require('./config.php');
 //
 try {
     $api = new CorpAPI($config['CORP_ID'], $config['APP_SECRET']);
-} catch (\WeWork\Utils\ParameterError $e) {
+} catch (\WeWorkApi\Utils\ParameterError $e) {
     echo $e->getMessage() . "\n";
 }
 

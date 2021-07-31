@@ -1,6 +1,6 @@
 <?php
 
-use WeWork\Utils\Utils;
+use WeWorkApi\Utils\Utils;
 
 include_once("Utils.class.php");
 

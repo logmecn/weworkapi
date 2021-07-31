@@ -1,4 +1,5 @@
 <?php
+namespace WeWorkApi;
 /*
  * Copyright (C) 2017 All rights reserved.
  *   
@@ -8,56 +9,56 @@
  * @Version 1.0
  * @Date 2017-12-26
      */
-namespace WeWork;
-include_once "API.class.php";
+include_once "Api\API.class.php";
 use CURLFile;
 use Exception;
-use WeWork\DataStructure\Agent;
-use WeWork\DataStructure\ApprovalDataList;
-use WeWork\DataStructure\Batch;
-use WeWork\DataStructure\BatchGetInvoiceInfoReq;
-use WeWork\DataStructure\BatchJobArgs;
-use WeWork\DataStructure\BatchJobResult;
-use WeWork\DataStructure\BatchUpdateInvoiceStatusReq;
-use WeWork\DataStructure\CheckinDataList;
-use WeWork\DataStructure\CheckinOption;
-use WeWork\DataStructure\Department;
-use WeWork\DataStructure\Menu;
-use WeWork\DataStructure\Message;
-use WeWork\DataStructure\PayWwSptrans2PocketReq;
-use WeWork\DataStructure\QueryWorkWxRedpackReq;
-use WeWork\DataStructure\QueryWwSptrans2PocketReq;
-use WeWork\DataStructure\SendWorkWxRedpackReq;
-use WeWork\DataStructure\Tag;
-use WeWork\DataStructure\User;
-use WeWork\DataStructure\UserDetailByUserTicket;
-use WeWork\DataStructure\UserInfoByCode;
-use WeWork\Utils\HttpUtils;
-use WeWork\Utils\ParameterError;
-use WeWork\Utils\QyApiError;
-use WeWork\utils\redisCache;
-use WeWork\Utils\SysError;
-use WeWork\Utils\Utils;
-//
-//include_once(__DIR__ . "./utils/Utils.class.php");
-//include_once(__DIR__ . "/utils/HttpUtils.class.php");
-//include_once(__DIR__ . "/utils/error.inc.php");
-//
-//include_once(__DIR__ . "/api/API.class.php");
-//
-//include_once(__DIR__ . "/api/datastructure/User.class.php");
-//include_once(__DIR__ . "/api/datastructure/Department.class.php");
-//include_once(__DIR__ . "/api/datastructure/Tag.class.php");
-//include_once(__DIR__ . "/api/datastructure/Batch.class.php");
-//include_once(__DIR__ . "/api/datastructure/Agent.class.php");
-//include_once(__DIR__ . "/api/datastructure/Menu.class.php");
-//include_once(__DIR__ . "/api/datastructure/Message.class.php");
-//include_once(__DIR__ . "/api/datastructure/Oauth.class.php");
-//include_once(__DIR__ . "/api/datastructure/CheckinOption.class.php");
-//include_once(__DIR__ . "/api/datastructure/CheckinData.class.php");
-//include_once(__DIR__ . "/api/datastructure/ApprovalData.class.php");
-//include_once(__DIR__ . "/api/datastructure/Pay.class.php");
-//include_once(__DIR__ . "/api/datastructure/Invoice.class.php");
+use WeWorkApi\Api\API;
+use WeWorkApi\DataStructure\Agent;
+use WeWorkApi\DataStructure\ApprovalDataList;
+use WeWorkApi\DataStructure\Batch;
+use WeWorkApi\DataStructure\BatchGetInvoiceInfoReq;
+use WeWorkApi\DataStructure\BatchJobArgs;
+use WeWorkApi\DataStructure\BatchJobResult;
+use WeWorkApi\DataStructure\BatchUpdateInvoiceStatusReq;
+use WeWorkApi\DataStructure\CheckinDataList;
+use WeWorkApi\DataStructure\CheckinOption;
+use WeWorkApi\DataStructure\Department;
+use WeWorkApi\DataStructure\Menu;
+use WeWorkApi\DataStructure\Message;
+use WeWorkApi\DataStructure\PayWwSptrans2PocketReq;
+use WeWorkApi\DataStructure\QueryWorkWxRedpackReq;
+use WeWorkApi\DataStructure\QueryWwSptrans2PocketReq;
+use WeWorkApi\DataStructure\SendWorkWxRedpackReq;
+use WeWorkApi\DataStructure\Tag;
+use WeWorkApi\DataStructure\User;
+use WeWorkApi\DataStructure\UserDetailByUserTicket;
+use WeWorkApi\DataStructure\UserInfoByCode;
+use WeWorkApi\Utils\HttpUtils;
+use WeWorkApi\Utils\ParameterError;
+use WeWorkApi\Utils\QyApiError;
+use WeWorkApi\Utils\redisCache;
+use WeWorkApi\Utils\SysError;
+use WeWorkApi\Utils\Utils;
+
+include_once(__DIR__ . "/Utils/Utils.class.php");
+include_once(__DIR__ . "/Utils/HttpUtils.class.php");
+include_once(__DIR__ . "/Utils/error.inc.php");
+
+include_once(__DIR__ . "/Api/API.class.php");
+
+include_once(__DIR__ . "/Api/Datastructure/User.class.php");
+include_once(__DIR__ . "/Api/Datastructure/Department.class.php");
+include_once(__DIR__ . "/Api/Datastructure/Tag.class.php");
+include_once(__DIR__ . "/Api/Datastructure/Batch.class.php");
+include_once(__DIR__ . "/Api/Datastructure/Agent.class.php");
+include_once(__DIR__ . "/Api/Datastructure/Menu.class.php");
+include_once(__DIR__ . "/Api/Datastructure/Message.class.php");
+include_once(__DIR__ . "/Api/Datastructure/Oauth.class.php");
+include_once(__DIR__ . "/Api/Datastructure/CheckinOption.class.php");
+include_once(__DIR__ . "/Api/Datastructure/CheckinData.class.php");
+include_once(__DIR__ . "/Api/Datastructure/ApprovalData.class.php");
+include_once(__DIR__ . "/Api/Datastructure/Pay.class.php");
+include_once(__DIR__ . "/Api/Datastructure/Invoice.class.php");
 
 /**
  * Class CorpAPI

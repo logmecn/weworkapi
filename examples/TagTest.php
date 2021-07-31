@@ -9,9 +9,9 @@
  *
  */
 
-use WeWork\CorpAPI;
-use WeWork\DataStructure\Tag;
-use WeWork\Utils\ParameterError;
+use WeWorkApi\CorpAPI;
+use WeWorkApi\DataStructure\Tag;
+use WeWorkApi\Utils\ParameterError;
 
 //include_once("../src/CorpAPI.class.php");
 //include_once("../src/api/ServiceCorpAPI.class.php");

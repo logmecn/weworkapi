@@ -33,8 +33,8 @@ composer require logmecn/weworkapi
 2. 使用composer更新了代码后，在 Api/Site.php 中使用：
     ```php
        use Phalapi\API;
-       use WeWork\CorpAPI;
-       use WeWork\Utils\ParameterError;
+       use WeWorkApi\CorpAPI;
+       use WeWorkApi\Utils\ParameterError;
        class Qywx extends API{
        public function Sendmsg(){
            $config = DI()->config->get("app.qywx");
@@ -106,7 +106,7 @@ golang : https://github.com/doubliekill/EnterpriseWechatSDK  1006401052yh@gmail.
 将本项目下载到你的目录，既可直接引用相关文件  
 ```
 //include_once("api/src/CorpAPI.class.php");
-use WeWork\CorpAPI;
+use WeWorkApi\CorpAPI;
 // 实例化 API 类
 $api = new CorpAPI($corpId='ww55ca070cb9b7eb22', $secret='ktmzrVIlUH0UW63zi7-JyzsgTL9NfwUhHde6or6zwQY');
 

@@ -9,13 +9,13 @@
  *
  */
 
-use WeWork\CorpAPI;
-use WeWork\DataStructure\Menu;
-use WeWork\DataStructure\PicWeixinMenu;
-use WeWork\DataStructure\ScanCodePushMenu;
-use WeWork\DataStructure\SubMenu;
-use WeWork\DataStructure\viewMenu;
-use WeWork\Utils\ParameterError;
+use WeWorkApi\CorpAPI;
+use WeWorkApi\DataStructure\Menu;
+use WeWorkApi\DataStructure\PicWeixinMenu;
+use WeWorkApi\DataStructure\ScanCodePushMenu;
+use WeWorkApi\DataStructure\SubMenu;
+use WeWorkApi\DataStructure\viewMenu;
+use WeWorkApi\Utils\ParameterError;
 
 //include_once("../src/CorpAPI.class.php");
 //include_once("../src/api/ServiceCorpAPI.class.php");

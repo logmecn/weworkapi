@@ -1,5 +1,5 @@
 <?php
-namespace WeWork\Utils;
+namespace WeWorkApi\Utils;
 include_once(__DIR__."/error.inc.php");
 
 

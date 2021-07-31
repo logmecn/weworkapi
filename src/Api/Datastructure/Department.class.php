@@ -1,8 +1,9 @@
 <?php
-namespace WeWork\DataStructure;
-use WeWork\Utils\Utils;
+namespace WeWorkApi\DataStructure;
+use WeWorkApi\Utils\ParameterError;
+use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__."/../../utils/Utils.class.php");
+include_once(__DIR__ . "/../../Utils/Utils.class.php");
 
 class Department { 
     public $name = null; // string
@@ -48,12 +49,20 @@ class Department {
         return $departmentList;
 	}
 
+    /**
+     * @param $department
+     * @throws ParameterError
+     */
     static public function CheckDepartmentCreateArgs($department)
     {
         Utils::checkNotEmptyStr($department->name, "department name");
         Utils::checkIsUInt($department->parentid, "parentid");
     }
 
+    /**
+     * @param $department
+     * @throws ParameterError
+     */
     static public function CheckDepartmentUpdateArgs($department)
     {
         Utils::checkIsUInt($department->id, "department id");

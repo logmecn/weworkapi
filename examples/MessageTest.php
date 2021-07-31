@@ -9,11 +9,11 @@
  *
  */
 
-use WeWork\CorpAPI;
-use WeWork\DataStructure\Message;
-use WeWork\DataStructure\NewsArticle;
-use WeWork\DataStructure\NewsMessageContent;
-use WeWork\Utils\ParameterError;
+use WeWorkApi\CorpAPI;
+use WeWorkApi\DataStructure\Message;
+use WeWorkApi\DataStructure\NewsArticle;
+use WeWorkApi\DataStructure\NewsMessageContent;
+use WeWorkApi\Utils\ParameterError;
 
 //include_once("../src/CorpAPI.class.php");
 //include_once("../src/api/ServiceCorpAPI.class.php");

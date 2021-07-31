@@ -9,12 +9,12 @@
  *
  */
 
-use WeWork\Api\ServiceCorpAPI;
-use WeWork\DataStructure\Message;
-use WeWork\DataStructure\NewsArticle;
-use WeWork\DataStructure\NewsMessageContent;
-use WeWork\DataStructure\SessionInfo;
-use WeWork\DataStructure\SetSessionInfoReq;
+use WeWorkApi\Api\ServiceCorpAPI;
+use WeWorkApi\DataStructure\Message;
+use WeWorkApi\DataStructure\NewsArticle;
+use WeWorkApi\DataStructure\NewsMessageContent;
+use WeWorkApi\DataStructure\SessionInfo;
+use WeWorkApi\DataStructure\SetSessionInfoReq;
 
 //include_once("../src/CorpAPI.class.php");
 //include_once("../src/api/ServiceCorpAPI.class.php");

@@ -9,20 +9,22 @@
  * @Date 2017-12-26
  *
  */
-namespace WeWork\Api;
-use WeWork\DataStructure\GetLoginInfoRsp;
-use WeWork\DataStructure\GetRegisterCodeReq;
-use WeWork\DataStructure\GetRegisterInfoRsp;
-use WeWork\DataStructure\SetAgentScopeReq;
-use WeWork\DataStructure\SetAgentScopeRsp;
-use WeWork\Utils\HttpUtils;
-use WeWork\Utils\Utils;
+namespace WeWorkApi\Api;
+use WeWorkApi\DataStructure\GetLoginInfoRsp;
+use WeWorkApi\DataStructure\GetRegisterCodeReq;
+use WeWorkApi\DataStructure\GetRegisterInfoRsp;
+use WeWorkApi\DataStructure\SetAgentScopeReq;
+use WeWorkApi\DataStructure\SetAgentScopeRsp;
+use WeWorkApi\Utils\HttpUtils;
+use WeWorkApi\Utils\ParameterError;
+use WeWorkApi\Utils\QyApiError;
+use WeWorkApi\Utils\Utils;
 
-//include_once(__DIR__ . "/../utils/Utils.class.php");
-//include_once(__DIR__ . "/../utils/HttpUtils.class.php");
-//include_once(__DIR__ . "/../utils/error.inc.php");
-//
-//include_once(__DIR__ . "/datastructure/ServiceProvider.class.php");
+include_once(__DIR__ . "/../Utils/Utils.class.php");
+include_once(__DIR__ . "/../Utils/HttpUtils.class.php");
+include_once(__DIR__ . "/../Utils/error.inc.php");
+
+include_once(__DIR__ . "/Datastructure/ServiceProvider.class.php");
 
 class ServiceProviderAPI extends API
 {
@@ -32,6 +34,8 @@ class ServiceProviderAPI extends API
 
     /**
      * 调用SetAgentScope/SetContactSyncSuccess 两个接口可以不用传corpid/provider_secret
+     * @param null $corpid
+     * @param null $provider_secret
      */
     public function __construct($corpid=null, $provider_secret=null)
     {
@@ -39,6 +43,11 @@ class ServiceProviderAPI extends API
         $this->provider_secret = $provider_secret;
     }
 
+    /**
+     * @return void|null
+     * @throws ParameterError
+     * @throws QyApiError
+     */
     protected function GetProviderAccessToken()
     { 
         if ( ! Utils::notEmptyStr($this->provider_access_token)) { 
@@ -46,6 +55,11 @@ class ServiceProviderAPI extends API
         } 
         return $this->provider_access_token;
     }
+
+    /**
+     * @throws ParameterError
+     * @throws QyApiError
+     */
     protected function RefreshProviderAccessToken()
     {
         Utils::checkNotEmptyStr($this->corpid, "corpid");
@@ -73,7 +87,8 @@ class ServiceProviderAPI extends API
      * @param $auth_code : string
      *
      * @return GetLoginInfoRsp : GetLoginInfoRsp
-     * @throws \WeWork\Utils\ParameterError
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function GetLoginInfo($auth_code)
     { 
@@ -90,9 +105,11 @@ class ServiceProviderAPI extends API
      *
      * @link https://work.weixin.qq.com/api/doc#11729/获取注册码
      *
-     * @param $GetRegisterCodeReq
+     * @param GetRegisterCodeReq $GetRegisterCodeReq
      *
-     * @return : string register_code
+     * @return string register_code
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function GetRegisterCode(GetRegisterCodeReq $GetRegisterCodeReq)
     { 
@@ -108,8 +125,9 @@ class ServiceProviderAPI extends API
      *
      * @param $register_code : string
      *
-     * @return  : GetRegisterInfoRsp
-     * @throws \WeWork\Utils\ParameterError
+     * @return GetRegisterInfoRsp : GetRegisterInfoRsp
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function GetRegisterInfo($register_code)
     { 
@@ -127,7 +145,9 @@ class ServiceProviderAPI extends API
      * @param $access_token : 该接口只能使用注册完成回调事件或者查询注册状态返回的access_token
      * @param SetAgentScopeReq $SetAgentScopeReq : SetAgentScopeReq
      *
-     * @return  : SetAgentScopeRsp
+     * @return SetAgentScopeRsp : SetAgentScopeRsp
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function SetAgentScope($access_token, SetAgentScopeReq $SetAgentScopeReq)
     { 
@@ -142,6 +162,8 @@ class ServiceProviderAPI extends API
      * @link https://work.weixin.qq.com/api/doc#11729/设置通讯录同步完成
      *
      * @param $access_token : 该接口只能使用注册完成回调事件或者查询注册状态返回的access_token
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function SetContactSyncSuccess($access_token)
     { 

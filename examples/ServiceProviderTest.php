@@ -9,10 +9,10 @@
  *
  */
 
-use WeWork\Api\ServiceProviderAPI;
-//use WeWork\Api\GetRegisterCodeReq;
-use WeWork\DataStructure\GetRegisterCodeReq;
-use WeWork\DataStructure\SetAgentScopeReq;
+use WeWorkApi\Api\ServiceProviderAPI;
+//use WeWorkApi\Api\GetRegisterCodeReq;
+use WeWorkApi\DataStructure\GetRegisterCodeReq;
+use WeWorkApi\DataStructure\SetAgentScopeReq;
 
 //include_once("../src/CorpAPI.class.php");
 //include_once("../src/api/ServiceCorpAPI.class.php");

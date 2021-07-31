@@ -1,9 +1,9 @@
 <?php
-namespace WeWork\DataStructure;
-use WeWork\Utils\ParameterError;
-use WeWork\Utils\Utils;
+namespace WeWorkApi\DataStructure;
+use WeWorkApi\Utils\ParameterError;
+use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__."/../../utils/Utils.class.php");
+include_once(__DIR__ . "/../../Utils/Utils.class.php");
 
 class CallBack { 
     public $url = null; // string

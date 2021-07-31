@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "WeWork\\": "src/"
+      "WeWorkApi\\": "src/"
     }
   }
 }

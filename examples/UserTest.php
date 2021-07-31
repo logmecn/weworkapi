@@ -14,11 +14,11 @@
 //include_once("../src/api/ServiceProviderAPI.class.php");
 
 
-use WeWork\CorpAPI;
-use WeWork\DataStructure\ExtattrItem;
-use WeWork\DataStructure\ExtattrList;
-use WeWork\DataStructure\User;
-use WeWork\Utils\ParameterError;
+use WeWorkApi\CorpAPI;
+use WeWorkApi\DataStructure\ExtattrItem;
+use WeWorkApi\DataStructure\ExtattrList;
+use WeWorkApi\DataStructure\User;
+use WeWorkApi\Utils\ParameterError;
 
 $config = require('./config.php');
 // 需启用 "管理工具" -> "通讯录同步", 并使用该处的secret, 才能通过API管理通讯录

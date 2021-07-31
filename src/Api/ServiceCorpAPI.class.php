@@ -9,23 +9,23 @@
  * @Date 2017-12-26
  *
  */
-namespace WeWork\Api;
-use WeWork\CorpAPI;
-use WeWork\DataStructure\GetAdminListRsp;
-use WeWork\DataStructure\GetAuthInfoRsp;
-use WeWork\DataStructure\GetPermanentCodeRsp;
-use WeWork\DataStructure\GetUserDetailBy3rdRsp;
-use WeWork\DataStructure\GetUserinfoBy3rdRsp;
-use WeWork\DataStructure\SetSessionInfoReq;
-use WeWork\Utils\HttpUtils;
-use WeWork\Utils\ParameterError;
-use WeWork\Utils\QyApiError;
-use WeWork\Utils\Utils;
+namespace WeWorkApi\Api;
+use WeWorkApi\CorpAPI;
+use WeWorkApi\DataStructure\GetAdminListRsp;
+use WeWorkApi\DataStructure\GetAuthInfoRsp;
+use WeWorkApi\DataStructure\GetPermanentCodeRsp;
+use WeWorkApi\DataStructure\GetUserDetailBy3rdRsp;
+use WeWorkApi\DataStructure\GetUserinfoBy3rdRsp;
+use WeWorkApi\DataStructure\SetSessionInfoReq;
+use WeWorkApi\Utils\HttpUtils;
+use WeWorkApi\Utils\ParameterError;
+use WeWorkApi\Utils\QyApiError;
+use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/../utils/Utils.class.php");
-include_once(__DIR__ . "/../utils/HttpUtils.class.php");
-include_once(__DIR__ . "/../utils/error.inc.php");
-include_once(__DIR__ . "/datastructure/ServiceCorp.class.php");
+include_once(__DIR__ . "/../Utils/Utils.class.php");
+include_once(__DIR__ . "/../Utils/HttpUtils.class.php");
+include_once(__DIR__ . "/../Utils/error.inc.php");
+include_once(__DIR__ . "/Datastructure/ServiceCorp.class.php");
 include_once(__DIR__ . "/API.class.php");
 
 class ServiceCorpAPI extends CorpAPI 

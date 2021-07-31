@@ -1,6 +1,6 @@
 <?php
 
-use WeWork\Utils\HttpUtils;
+use WeWorkApi\Utils\HttpUtils;
 
 include_once(__DIR__.'/HttpUtils.class.php');
 
