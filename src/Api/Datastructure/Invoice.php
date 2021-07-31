@@ -1,6 +1,6 @@
 <?php
 namespace WeWorkApi\DataStructure;
-include_once(__DIR__ . "/../../Utils/Utils.class.php");
+include_once(__DIR__ . "/../../Utils/Utils.php");
 
 class InvoiceInfo
 {

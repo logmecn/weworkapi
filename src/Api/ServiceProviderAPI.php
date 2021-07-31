@@ -2,7 +2,7 @@
 /*
  * Copyright (C) 2017 All rights reserved.
  *   
- * @File ServiceProviderAPI.class.php
+ * @File ServiceProviderApi.php
  * @Brief : 为服务商开放的接口, 使用服务商的token
  * @Author abelzhu, abelzhu@tencent.com
  * @Version 1.0
@@ -20,11 +20,11 @@ use WeWorkApi\Utils\ParameterError;
 use WeWorkApi\Utils\QyApiError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/../Utils/Utils.class.php");
-include_once(__DIR__ . "/../Utils/HttpUtils.class.php");
+include_once(__DIR__ . "/../Utils/Utils.php");
+include_once(__DIR__ . "/../Utils/HttpUtils.php");
 include_once(__DIR__ . "/../Utils/error.inc.php");
 
-include_once(__DIR__ . "/Datastructure/ServiceProvider.class.php");
+include_once(__DIR__ . "/Datastructure/ServiceProvider.php");
 
 class ServiceProviderAPI extends API
 {

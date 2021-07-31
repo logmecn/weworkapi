@@ -6,8 +6,8 @@ use WeWorkApi\Utils\ParameterError;
 use WeWorkApi\Utils\QyApiError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/../Utils/Utils.class.php");
-include_once(__DIR__ . "/../Utils/HttpUtils.class.php");
+include_once(__DIR__ . "/../Utils/Utils.php");
+include_once(__DIR__ . "/../Utils/HttpUtils.php");
 include_once(__DIR__ . "/../Utils/error.inc.php");
 
 abstract class API

@@ -2,7 +2,7 @@
 
 use WeWorkApi\Utils\HttpUtils;
 
-include_once(__DIR__.'/HttpUtils.class.php');
+include_once(__DIR__.'/HttpUtils.php');
 
 // $output = HttpUtils::httpGet("http://localhost:8080");
 // var_dump($output);

@@ -3,7 +3,7 @@ namespace WeWorkApi\DataStructure;
 use WeWorkApi\Utils\ParameterError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/../../Utils/Utils.class.php");
+include_once(__DIR__ . "/../../Utils/Utils.php");
 
 class CallBack { 
     public $url = null; // string

@@ -2,7 +2,7 @@
 
 use WeWorkApi\Utils\Utils;
 
-include_once("Utils.class.php");
+include_once("Utils.php");
 
 
 class A {

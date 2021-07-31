@@ -10,8 +10,8 @@
  */
 
 namespace App\Common;
-//include_once "../src/CorpAPI.class.php"; //互联企业用LinkAPI.class.php
-//include_once "../src/api/datastructure/MessageExt.class.php";
+//include_once "../src/CorpAPI.php"; //互联企业用LinkAPI.php
+//include_once "../src/api/datastructure/MessageExt.php";
 
 use WeWorkApi\CorpAPI;
 use Exception;

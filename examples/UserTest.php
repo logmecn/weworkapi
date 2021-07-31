@@ -9,9 +9,9 @@
  *
  */
  
-//include_once("../src/CorpAPI.class.php");
-//include_once("../src/api/ServiceCorpAPI.class.php");
-//include_once("../src/api/ServiceProviderAPI.class.php");
+//include_once("../src/CorpAPI.php");
+//include_once("../src/api/ServiceCorpApi.php");
+//include_once("../src/api/ServiceProviderApi.php");
 
 
 use WeWorkApi\CorpAPI;

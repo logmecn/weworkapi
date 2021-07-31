@@ -14,9 +14,9 @@ use WeWorkApi\Api\ServiceProviderAPI;
 use WeWorkApi\DataStructure\GetRegisterCodeReq;
 use WeWorkApi\DataStructure\SetAgentScopeReq;
 
-//include_once("../src/CorpAPI.class.php");
-//include_once("../src/api/ServiceCorpAPI.class.php");
-//include_once("../src/api/ServiceProviderAPI.class.php");
+//include_once("../src/CorpAPI.php");
+//include_once("../src/api/ServiceCorpApi.php");
+//include_once("../src/api/ServiceProviderApi.php");
  
 try {
     $ServiceProviderAPI = new ServiceProviderAPI(

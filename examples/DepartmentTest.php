@@ -13,9 +13,9 @@ use WeWorkApi\CorpAPI;
 use WeWorkApi\DataStructure\Department;
 use WeWorkApi\Utils\ParameterError;
 
-include_once("../src/CorpAPI.class.php");
-include_once("../src/Api/ServiceCorpAPI.class.php");
-include_once("../src/Api/ServiceProviderAPI.class.php");
+include_once("../src/CorpAPI.php");
+include_once("../src/Api/ServiceCorpApi.php");
+include_once("../src/Api/ServiceProviderApi.php");
 
 $config = require('./config.php');
 

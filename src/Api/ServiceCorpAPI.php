@@ -2,7 +2,7 @@
 /*
  * Copyright (C) 2017 All rights reserved.
  *   
- * @File ServiceCorpAPI.class.php
+ * @File ServiceCorpApi.php
  * @Brief : 为服务商开放的接口, 使用应用授权的token
  * @Author abelzhu, abelzhu@tencent.com
  * @Version 1.0
@@ -22,11 +22,11 @@ use WeWorkApi\Utils\ParameterError;
 use WeWorkApi\Utils\QyApiError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/../Utils/Utils.class.php");
-include_once(__DIR__ . "/../Utils/HttpUtils.class.php");
+include_once(__DIR__ . "/../Utils/Utils.php");
+include_once(__DIR__ . "/../Utils/HttpUtils.php");
 include_once(__DIR__ . "/../Utils/error.inc.php");
-include_once(__DIR__ . "/Datastructure/ServiceCorp.class.php");
-include_once(__DIR__ . "/API.class.php");
+include_once(__DIR__ . "/Datastructure/ServiceCorp.php");
+include_once(__DIR__ . "/API.php");
 
 class ServiceCorpAPI extends CorpAPI 
 {

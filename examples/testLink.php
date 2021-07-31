@@ -15,7 +15,7 @@ use WeWorkApi\DataStructure\NewsMessageContent;
 use WeWorkApi\LinkAPI;
 use WeWorkApi\Utils\ParameterError;
 
-include_once(__DIR__ . "/../src/LinkAPI.class.php");
+include_once(__DIR__ . "/../src/LinkAPI.php");
 $config = require(__DIR__ . "/config_link.php");
 //注意这里的配置文件，请改成自己的配置信息
 //use LinkAPI;

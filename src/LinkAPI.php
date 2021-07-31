@@ -6,8 +6,8 @@ use WeWorkApi\DataStructure\User;
 use WeWorkApi\Utils\ParameterError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/Api/Datastructure/Link_Message.class.php");
-include_once("CorpAPI.class.php");
+include_once(__DIR__ . "/Api/Datastructure/Link_Message.php");
+include_once("CorpAPI.php");
 
 class LinkAPI extends CorpAPI {
 

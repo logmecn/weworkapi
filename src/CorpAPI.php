@@ -3,13 +3,12 @@ namespace WeWorkApi;
 /*
  * Copyright (C) 2017 All rights reserved.
  *   
- * @File CorpAPI.class.php
+ * @File CorpAPI.php
  * @Brief : 为企业开放的接口
  * @Author abelzhu, abelzhu@tencent.com
  * @Version 1.0
  * @Date 2017-12-26
      */
-include_once "Api\API.class.php";
 use CURLFile;
 use Exception;
 use WeWorkApi\Api\API;
@@ -40,25 +39,23 @@ use WeWorkApi\Utils\redisCache;
 use WeWorkApi\Utils\SysError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/Utils/Utils.class.php");
-include_once(__DIR__ . "/Utils/HttpUtils.class.php");
+include_once "Api\API.php";
+include_once(__DIR__ . "/Utils/Utils.php");
+include_once(__DIR__ . "/Utils/HttpUtils.php");
 include_once(__DIR__ . "/Utils/error.inc.php");
-
-include_once(__DIR__ . "/Api/API.class.php");
-
-include_once(__DIR__ . "/Api/Datastructure/User.class.php");
-include_once(__DIR__ . "/Api/Datastructure/Department.class.php");
-include_once(__DIR__ . "/Api/Datastructure/Tag.class.php");
-include_once(__DIR__ . "/Api/Datastructure/Batch.class.php");
-include_once(__DIR__ . "/Api/Datastructure/Agent.class.php");
-include_once(__DIR__ . "/Api/Datastructure/Menu.class.php");
-include_once(__DIR__ . "/Api/Datastructure/Message.class.php");
-include_once(__DIR__ . "/Api/Datastructure/Oauth.class.php");
-include_once(__DIR__ . "/Api/Datastructure/CheckinOption.class.php");
-include_once(__DIR__ . "/Api/Datastructure/CheckinData.class.php");
-include_once(__DIR__ . "/Api/Datastructure/ApprovalData.class.php");
-include_once(__DIR__ . "/Api/Datastructure/Pay.class.php");
-include_once(__DIR__ . "/Api/Datastructure/Invoice.class.php");
+include_once(__DIR__ . "/Api/Datastructure/User.php");
+include_once(__DIR__ . "/Api/Datastructure/Department.php");
+include_once(__DIR__ . "/Api/Datastructure/Tag.php");
+include_once(__DIR__ . "/Api/Datastructure/Batch.php");
+include_once(__DIR__ . "/Api/Datastructure/Agent.php");
+include_once(__DIR__ . "/Api/Datastructure/Menu.php");
+include_once(__DIR__ . "/Api/Datastructure/Message.php");
+include_once(__DIR__ . "/Api/Datastructure/Oauth.php");
+include_once(__DIR__ . "/Api/Datastructure/CheckinOption.php");
+include_once(__DIR__ . "/Api/Datastructure/CheckinData.php");
+include_once(__DIR__ . "/Api/Datastructure/ApprovalData.php");
+include_once(__DIR__ . "/Api/Datastructure/Pay.php");
+include_once(__DIR__ . "/Api/Datastructure/Invoice.php");
 
 /**
  * Class CorpAPI
