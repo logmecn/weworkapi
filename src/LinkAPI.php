@@ -7,7 +7,7 @@ use WeWorkApi\Utils\ParameterError;
 use WeWorkApi\Utils\QyApiError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/Datastructure/Link_Message.php");
+include_once(__DIR__ . "/DataStructure/Link_Message.php");
 include_once("CorpAPI.php");
 
 class LinkAPI extends CorpAPI {

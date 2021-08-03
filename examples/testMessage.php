@@ -11,7 +11,7 @@
 
 namespace App\Common;
 include_once "../src/CorpAPI.php"; //互联企业用LinkAPI.php
-include_once "../src/Datastructure/MessageExt.php";
+include_once "../src/DataStructure/MessageExt.php";
 
 use WeWorkApi\CorpAPI;
 use Exception;

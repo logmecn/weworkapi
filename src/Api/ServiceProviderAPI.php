@@ -24,7 +24,7 @@ include_once(__DIR__ . "/../Utils/Utils.php");
 include_once(__DIR__ . "/../Utils/HttpUtils.php");
 include_once(__DIR__ . "/../Utils/Error.php");
 
-include_once(__DIR__ . "/../Datastructure/ServiceProvider.php");
+include_once(__DIR__ . "/../DataStructure/ServiceProvider.php");
 
 class ServiceProviderAPI extends API
 {

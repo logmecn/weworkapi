@@ -25,7 +25,7 @@ use WeWorkApi\Utils\Utils;
 include_once(__DIR__ . "/../Utils/Utils.php");
 include_once(__DIR__ . "/../Utils/HttpUtils.php");
 include_once(__DIR__ . "/../Utils/Error.php");
-include_once(__DIR__ . "/../Datastructure/ServiceCorp.php");
+include_once(__DIR__ . "/../DataStructure/ServiceCorp.php");
 include_once(__DIR__ . "/API.php");
 
 class ServiceCorpAPI extends CorpAPI 

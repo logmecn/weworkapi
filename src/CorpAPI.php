@@ -45,19 +45,19 @@ include_once "Api\API.php";
 include_once(__DIR__ . "/Utils/Utils.php");
 include_once(__DIR__ . "/Utils/HttpUtils.php");
 include_once(__DIR__ . "/Utils/Error.php");
-include_once(__DIR__ . "/Datastructure/User.php");
-include_once(__DIR__ . "/Datastructure/Department.php");
-include_once(__DIR__ . "/Datastructure/Tag.php");
-include_once(__DIR__ . "/Datastructure/Batch.php");
-include_once(__DIR__ . "/Datastructure/Agent.php");
-include_once(__DIR__ . "/Datastructure/Menu.php");
-include_once(__DIR__ . "/Datastructure/Message.php");
-include_once(__DIR__ . "/Datastructure/Oauth.php");
-include_once(__DIR__ . "/Datastructure/CheckinOption.php");
-include_once(__DIR__ . "/Datastructure/CheckinData.php");
-include_once(__DIR__ . "/Datastructure/ApprovalData.php");
-include_once(__DIR__ . "/Datastructure/Pay.php");
-include_once(__DIR__ . "/Datastructure/Invoice.php");
+include_once(__DIR__ . "/DataStructure/User.php");
+include_once(__DIR__ . "/DataStructure/Department.php");
+include_once(__DIR__ . "/DataStructure/Tag.php");
+include_once(__DIR__ . "/DataStructure/Batch.php");
+include_once(__DIR__ . "/DataStructure/Agent.php");
+include_once(__DIR__ . "/DataStructure/Menu.php");
+include_once(__DIR__ . "/DataStructure/Message.php");
+include_once(__DIR__ . "/DataStructure/Oauth.php");
+include_once(__DIR__ . "/DataStructure/CheckinOption.php");
+include_once(__DIR__ . "/DataStructure/CheckinData.php");
+include_once(__DIR__ . "/DataStructure/ApprovalData.php");
+include_once(__DIR__ . "/DataStructure/Pay.php");
+include_once(__DIR__ . "/DataStructure/Invoice.php");
 
 /**
  * Class CorpAPI
