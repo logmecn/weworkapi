@@ -8,8 +8,11 @@
  * date: 2021/07/15
  */
 namespace WeWorkApi\DataStructure;
-include_once(__DIR__ . "/../../Utils/error.inc.php");
-include_once(__DIR__ . "/../../Utils/Utils.php");
+use WeWorkApi\Utils\QyApiError;
+use WeWorkApi\Utils\Utils;
+
+include_once(__DIR__ . "/../Utils/Error.php");
+include_once(__DIR__ . "/../Utils/Utils.php");
 
 /*
  * MD文档消息类型
@@ -24,6 +27,9 @@ class MDMessageContent
         $this->content = $content;
     }
 
+    /**
+     * @throws QyApiError
+     */
     public function CheckMessageSendArgs()
     {
         if (mb_detect_encoding($this->content, 'UTF-8') != 'UTF-8') {
@@ -62,6 +68,9 @@ class MinaMessageContent
         $this->content_item = $content_item;
     }
 
+    /**
+     * @throws QyApiError
+     */
     public function CheckMessageSendArgs()
     {
         $len_title = strlen($this->title);
@@ -136,6 +145,9 @@ class TaskCardMessageContent
         $this->btn = $btn; //按钮列表，按钮个数为1~2个。
     }
 
+    /**
+     * @throws QyApiError
+     */
     public function CheckMessageSendArgs()
     {
         $len_title = strlen($this->title);

@@ -1,7 +1,11 @@
 <?php
 namespace WeWorkApi\DataStructure;
-include_once(__DIR__ . "/../../Utils/error.inc.php");
-include_once(__DIR__ . "/../../Utils/Utils.php");
+
+use WeWorkApi\Utils\QyApiError;
+use WeWorkApi\Utils\Utils;
+
+include_once(__DIR__ . "/../Utils/Error.php");
+include_once(__DIR__ . "/../Utils/Utils.php");
 
 class Message 
 { 
@@ -16,7 +20,10 @@ class Message
     public $enable_duplicate_check = 0; //	表示是否开启重复消息检查，0表示否，1表示是，默认0
     public $duplicate_check_interval = 1800; //表示是否重复消息检查的时间间隔，默认1800s，最大不超过4小时
 
-	public function CheckMessageSendArgs()
+    /**
+     * @throws QyApiError
+     */
+    public function CheckMessageSendArgs()
     { 
         if (count($this->touser) > 1000) throw new QyApiError("touser should be no more than 1000");
         if (count($this->toparty) > 100) throw new QyApiError("toparty should be no more than 100");
@@ -260,6 +267,9 @@ class NewsArticle {
         $this->btntxt = $btntxt;
     }
 
+    /**
+     * @throws \WeWorkApi\Utils\ParameterError
+     */
     public function CheckMessageSendArgs()
     { 
         Utils::checkNotEmptyStr($this->title, "title");

@@ -1,6 +1,8 @@
 <?php
 namespace WeWorkApi\DataStructure;
-include_once(__DIR__ . "/../../Utils/Utils.php");
+use WeWorkApi\Utils\Utils;
+
+include_once(__DIR__ . "/../Utils/Utils.php");
 
 class UserInfoByCode 
 {

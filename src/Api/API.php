@@ -8,7 +8,7 @@ use WeWorkApi\Utils\Utils;
 
 include_once(__DIR__ . "/../Utils/Utils.php");
 include_once(__DIR__ . "/../Utils/HttpUtils.php");
-include_once(__DIR__ . "/../Utils/error.inc.php");
+include_once(__DIR__ . "/../Utils/Error.php");
 
 abstract class API
 {
@@ -128,7 +128,7 @@ abstract class API
     /**
      * @param $url
      * @param bool $refreshTokenWhenExpired
-     * @return Utils\http
+     * @return \WeWorkApi\Utils\http
      * @throws QyApiError
      */
     protected function _HttpGetParseToJson($url, $refreshTokenWhenExpired=true)

@@ -1,6 +1,6 @@
 <?php
 namespace WeWorkApi\Utils;
-include_once(__DIR__."/error.inc.php");
+include_once(__DIR__."/Error.php");
 
 class Utils { 
 
@@ -20,12 +20,22 @@ class Utils {
             throw new ParameterError($name . " can not be empty string");
     }
 
+    /**
+     * @param $var
+     * @param $name
+     * @throws ParameterError
+     */
     static public function checkIsUInt($var, $name)
     {
         if (!(is_int($var) && $var >= 0))
             throw new ParameterError($name . " need unsigned int");
     }
 
+    /**
+     * @param $var
+     * @param $name
+     * @throws ParameterError
+     */
     static public function checkNotEmptyArray($var, $name)
     {
         if (!is_array($var) || count($var) == 0) {
@@ -66,12 +76,12 @@ class Utils {
 		return (object)$arr;
 	}
 
-	/**
-	 * 对象 转 数组
-	 *
-	 * @param object $obj 对象
-	 * @return array
-	 */
+    /**
+     * 对象 转 数组
+     *
+     * @param $object
+     * @return array
+     */
 	function Object2Array($object) { 
 		if (is_object($object) || is_array($object)) {
             $array = array();
@@ -105,8 +115,7 @@ class Utils {
     {    
         //禁止引用外部xml实体
         libxml_disable_entity_loader(true);
-        $values = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);        
-        return $values;
+        return json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
     }
 
 } // class Utils

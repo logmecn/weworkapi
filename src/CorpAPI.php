@@ -32,7 +32,9 @@ use WeWorkApi\DataStructure\Tag;
 use WeWorkApi\DataStructure\User;
 use WeWorkApi\DataStructure\UserDetailByUserTicket;
 use WeWorkApi\DataStructure\UserInfoByCode;
+use WeWorkApi\Utils\HttpError;
 use WeWorkApi\Utils\HttpUtils;
+use WeWorkApi\Utils\NetWorkError;
 use WeWorkApi\Utils\ParameterError;
 use WeWorkApi\Utils\QyApiError;
 use WeWorkApi\Utils\redisCache;
@@ -42,20 +44,20 @@ use WeWorkApi\Utils\Utils;
 include_once "Api\API.php";
 include_once(__DIR__ . "/Utils/Utils.php");
 include_once(__DIR__ . "/Utils/HttpUtils.php");
-include_once(__DIR__ . "/Utils/error.inc.php");
-include_once(__DIR__ . "/Api/Datastructure/User.php");
-include_once(__DIR__ . "/Api/Datastructure/Department.php");
-include_once(__DIR__ . "/Api/Datastructure/Tag.php");
-include_once(__DIR__ . "/Api/Datastructure/Batch.php");
-include_once(__DIR__ . "/Api/Datastructure/Agent.php");
-include_once(__DIR__ . "/Api/Datastructure/Menu.php");
-include_once(__DIR__ . "/Api/Datastructure/Message.php");
-include_once(__DIR__ . "/Api/Datastructure/Oauth.php");
-include_once(__DIR__ . "/Api/Datastructure/CheckinOption.php");
-include_once(__DIR__ . "/Api/Datastructure/CheckinData.php");
-include_once(__DIR__ . "/Api/Datastructure/ApprovalData.php");
-include_once(__DIR__ . "/Api/Datastructure/Pay.php");
-include_once(__DIR__ . "/Api/Datastructure/Invoice.php");
+include_once(__DIR__ . "/Utils/Error.php");
+include_once(__DIR__ . "/Datastructure/User.php");
+include_once(__DIR__ . "/Datastructure/Department.php");
+include_once(__DIR__ . "/Datastructure/Tag.php");
+include_once(__DIR__ . "/Datastructure/Batch.php");
+include_once(__DIR__ . "/Datastructure/Agent.php");
+include_once(__DIR__ . "/Datastructure/Menu.php");
+include_once(__DIR__ . "/Datastructure/Message.php");
+include_once(__DIR__ . "/Datastructure/Oauth.php");
+include_once(__DIR__ . "/Datastructure/CheckinOption.php");
+include_once(__DIR__ . "/Datastructure/CheckinData.php");
+include_once(__DIR__ . "/Datastructure/ApprovalData.php");
+include_once(__DIR__ . "/Datastructure/Pay.php");
+include_once(__DIR__ . "/Datastructure/Invoice.php");
 
 /**
  * Class CorpAPI
@@ -731,9 +733,9 @@ class CorpAPI extends API
     /**
      * @brief MediaUpload : 上传临时素材
      * @link https://work.weixin.qq.com/api/doc#10112
-     * @param $filePath : string, 文件路径
-     * @param $type : string, 媒体文件类型，分别有图片（image）、语音（voice）、视频（video），普通文件（file）
-     * @return  : string media_id
+     * @param  string $filePath :, 文件路径
+     * @param string $type  , 媒体文件类型，分别有图片（image）、语音（voice）、视频（video），普通文件（file）
+     * @return string media_id
      * @throws ParameterError *@throws QyApiError
      * @throws QyApiError
      */
@@ -997,6 +999,9 @@ class CorpAPI extends API
      * @param $url
      * @param $args
      * @return mixed
+     * @throws SysError
+     * @throws HttpError
+     * @throws NetWorkError
      */
     private function _HttpPostXml($url, $args)
     {
@@ -1021,8 +1026,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#11543
      * @param SendWorkWxRedpackReq $SendWorkWxRedpackReq
      * @return mixed : SendWorkWxRedpackRsp
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      * @note : 本接口只检查通信是否正常，业务结果需调用方自行判断，参看文档
      */
     static public function SendWorkWxRedpack(SendWorkWxRedpackReq $SendWorkWxRedpackReq)
@@ -1039,8 +1047,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#11544
      * @param QueryWorkWxRedpackReq $QueryWorkWxRedpackReq
      * @return mixed : QueryWorkWxRedpackRsp
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     static public function QueryWorkWxRedpack(QueryWorkWxRedpackReq $QueryWorkWxRedpackReq)
     {
@@ -1056,8 +1067,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#11545
      * @param PayWwSptrans2PocketReq $PayWwSptrans2PocketReq
      * @return mixed : PayWwSptrans2PocketRsp
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     static public function PayWwSptrans2Pocket(PayWwSptrans2PocketReq $PayWwSptrans2PocketReq)
     {
@@ -1073,8 +1087,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#11546
      * @param QueryWwSptrans2PocketReq $QueryWwSptrans2PocketReq
      * @return mixed : QueryWwSptrans2Pocketsp
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     static public function QueryWwSptrans2Pocket(QueryWwSptrans2PocketReq $QueryWwSptrans2PocketReq)
     {

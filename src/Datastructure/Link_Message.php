@@ -1,7 +1,10 @@
 <?php
 namespace WeWorkApi\DataStructure;
-include_once(__DIR__ . "/../../Utils/error.inc.php");
-include_once(__DIR__ . "/../../Utils/Utils.php");
+use WeWorkApi\Utils\QyApiError;
+use WeWorkApi\Utils\Utils;
+
+include_once(__DIR__ . "/../Utils/Error.php");
+include_once(__DIR__ . "/../Utils/Utils.php");
 
 class Link_Message
 {
@@ -13,6 +16,9 @@ class Link_Message
     public $safe = null; // uint, 表示是否是保密消息，0表示否，1表示是，默认0
     public $messageContent = null; // xxxMessageContent
 
+    /**
+     * @throws QyApiError
+     */
     public function CheckMessageSendArgs()
     {
         if (count($this->touser) > 1000) throw new QyApiError("touser should be no more than 1000");

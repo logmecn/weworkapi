@@ -1,6 +1,6 @@
 <?php
 namespace WeWorkApi\Utils;
-include_once(__DIR__."/error.inc.php");
+include_once(__DIR__."/Error.php");
 
 
 class HttpUtils
@@ -58,11 +58,14 @@ class HttpUtils
 	    return '{' . $json . '}';
 	}
 
-	/**
-	 * http get
-	 * @param string $url
-	 * @return http response body
-	 */
+    /**
+     * http get
+     * @param string $url
+     * @return bool|string
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
+     */
 	static public function httpGet($url)
 	{
         $config = require(__DIR__.'./../config.php');
@@ -81,12 +84,15 @@ class HttpUtils
         return self::__exec($ch);
 	}
 
-	/**
-	 * http post
-	 * @param string $url
-	 * @param string or dict $postData
-	 * @return http response body
-	 */
+    /**
+     * http post
+     * @param string $url
+     * @param $postData
+     * @return bool|string
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
+     */
 	static public function httpPost($url, $postData)
 	{
         $config = require(__DIR__.'./../config.php');
@@ -120,7 +126,13 @@ class HttpUtils
 	    }
 	}
 
-	static private function __exec($ch)
+    /**
+     * @param $ch
+     * @return bool|string
+     * @throws HttpError
+     * @throws NetWorkError
+     */
+    static private function __exec($ch)
 	{
 		$output = curl_exec($ch);
 		$status = curl_getinfo($ch);
@@ -138,10 +150,12 @@ class HttpUtils
 		return $output;
 	}
 
-	static private function __checkDeps()
+    /**
+     *
+     * @throws SysError
+     */
+    static private function __checkDeps()
 	{
-		if (!function_exists("curl_init")) {
-			throw new InternalError("missing curl extend");
-		}
+		if (!function_exists("curl_init")) throw new SysError("missing curl extend");
 	}
 }

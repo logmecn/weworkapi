@@ -3,7 +3,7 @@ namespace WeWorkApi\DataStructure;
 
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/../../Utils/Utils.php");
+include_once(__DIR__ . "/../Utils/Utils.php");
 
 class Agent
 {
@@ -83,6 +83,10 @@ class Agent
         return $args;
     }
 
+    /**
+     * @param $agent
+     * @throws \WeWorkApi\Utils\ParameterError
+     */
     public static function CheckAgentSetArgs($agent)
     { 
         utils::checkIsUInt($agent->agentid, "agentid");

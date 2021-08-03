@@ -4,9 +4,10 @@ namespace WeWorkApi;
 use WeWorkApi\DataStructure\Link_Message;
 use WeWorkApi\DataStructure\User;
 use WeWorkApi\Utils\ParameterError;
+use WeWorkApi\Utils\QyApiError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/Api/Datastructure/Link_Message.php");
+include_once(__DIR__ . "/Datastructure/Link_Message.php");
 include_once("CorpAPI.php");
 
 class LinkAPI extends CorpAPI {
@@ -32,8 +33,7 @@ class LinkAPI extends CorpAPI {
      * @link https://work.weixin.qq.com/api/doc/90000/90135/93172
      * @return array userids 示例："userids": ["CORPID/USERID"],
      * @throws ParameterError
-     * @throws Utils\QyApiError
-     * @throws \WeWorkApi\Utils\QyApiError
+     * @throws QyApiError
      */
     public function LinkGetPermList(){
         self::_HttpCall(self::Link_Get_Perm_List, 'POST', '');
@@ -47,6 +47,7 @@ class LinkAPI extends CorpAPI {
      * @param $userid : string
      * @return User : User
      * @throws ParameterError
+     * @throws QyApiError
      */
     public function Link_UserGet($userid)
     {
@@ -64,6 +65,7 @@ class LinkAPI extends CorpAPI {
      *
      * @return array : User array
      * @throws ParameterError
+     * @throws QyApiError
      */
     public function Link_UserSimpleList($department_id, $fetchChild=false)
     {
@@ -84,6 +86,7 @@ class LinkAPI extends CorpAPI {
      *
      * @return array
      * @throws ParameterError
+     * @throws QyApiError
      */
     public function Link_UserList($departmentId, $fetchChild=false)
     {
@@ -99,6 +102,8 @@ class LinkAPI extends CorpAPI {
      * @param $departmentId : string, 该字段用的是互联应用可见范围接口返回的department_ids参数，用的是 linkedid + ’/‘ + department_id 拼成的字符串
      *
      * @return array : Department array
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function Link_DepartmentList($departmentId)
     {
@@ -119,6 +124,8 @@ class LinkAPI extends CorpAPI {
      * @param $invalidTagIdList : uint array
      *
      * @return void
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function Link_MessageSend(Link_Message $message, &$invalidUserIdList, &$invalidPartyIdList, &$invalidTagIdList)
     {
@@ -182,25 +189,28 @@ class LinkAPI extends CorpAPI {
     }
 
     // =================== 以下为 企业互联 相关API接口 =================================
+
     /**
      * @desc 获取应用共享信息
      * 上级企业通过该接口获取某个应用分享给的所有企业列表。
      * 特别注意，对于有敏感权限的应用，需要下级企业确认后才能共享成功，若下级企业未确认，则不会存在于该接口的返回列表
      * @link https://work.weixin.qq.com/api/doc/90000/90135/93403
-     * @param integer $agentid  上级企业应用agentid
+     * @param integer $agentid 上级企业应用agentid
      * @return array $share_info
-     * share_info	应用共享信息
-    share_info.corpid	下级企业corpid
-    share_info.corp_name	下级企业名称
-    share_info.agentid	下级企业应用id
+     * share_info    应用共享信息
+     * share_info.corpid    下级企业corpid
+     * share_info.corp_name    下级企业名称
+     * share_info.agentid    下级企业应用id
      * 示例
-     {"errcode": 0,
-    "errmsg": "ok",
-    "share_info":[{
-        "corpid": "wwcorpid1",
-        "corp_name": "测试企业1"
-        "agentid": 1111
-    }]}
+     * {"errcode": 0,
+     * "errmsg": "ok",
+     * "share_info":[{
+     * "corpid": "wwcorpid1",
+     * "corp_name": "测试企业1"
+     * "agentid": 1111
+     * }]}
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function Corp_ListAppShareInfo($agentid)
     {
@@ -212,16 +222,11 @@ class LinkAPI extends CorpAPI {
      * @desc 获取下级企业的access_token。注意，此token需要另外缓存，避免多次调用，且“一定”不要与当前应用混淆
      * 获取应用可见范围内下级企业的access_token，该access_token可用于调用下级企业通讯录的只读接口。
      * @link https://work.weixin.qq.com/api/doc/90000/90135/93359
-     * @param string $corpid 	已授权的下级企业corpid  注意是 "下级企业的corpid"
-     * @param integer $agentid  已授权的 "下级" 企业 "应用ID"，不是当前企业的
+     * @param string $corpid 已授权的下级企业corpid  注意是 "下级企业的corpid"
+     * @param integer $agentid 已授权的 "下级" 企业 "应用ID"，不是当前企业的
      * @return array $share_info
-     * @return string $access_token 获取到的下级企业调用凭证，最长为512字节
-     * @return string $expires_in	凭证的有效时间（秒）
-    {   "errcode": 0,
-    "errmsg": "ok",
-    "access_token": "accesstoken000001",
-    "expires_in": 7200
-    }
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function Corp_GroupAccessToken($corpid, $agentid)
     {
@@ -236,14 +241,8 @@ class LinkAPI extends CorpAPI {
      * @param string $userid 通过code2Session接口获取到的加密的userid，不多于64字节
      * @param string $session_key 通过code2Session接口获取到的属于上级企业的会话密钥-不多于64字节
      * @return array
-     * @return string $userid, 下级企业用户的ID。此时是解密后的明文ID
-     * @return string $session_key 属于下级企业的会话密钥
-    {
-    "errcode": 0,
-    "errmsg": "ok"
-    "userid": "jack",
-    "session_key": "DGAuy2KVaGcnsUrXk8ERgw==",
-    }
+     * @throws ParameterError
+     * @throws QyApiError
      */
     public function Corp_MinaSession($userid, $session_key)
     {

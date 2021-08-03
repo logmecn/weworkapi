@@ -19,7 +19,10 @@
     "php": ">=7.1",
     "ext-json": "*",
     "ext-curl": "*",
-    "ext-redis": "*"
+    "ext-redis": "*",
+    "ext-libxml": "*",
+    "ext-simplexml": "*",
+    "ext-mbstring": "*"
   },
   "autoload": {
     "psr-4": {

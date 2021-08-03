@@ -1,6 +1,9 @@
 <?php
 namespace WeWorkApi\DataStructure;
-include_once(__DIR__ . "/../../Utils/Utils.php");
+use WeWorkApi\Utils\QyApiError;
+use WeWorkApi\Utils\Utils;
+
+include_once(__DIR__ . "/../Utils/Utils.php");
 
 class TagUser { 
     public $userid = null;
@@ -65,17 +68,32 @@ class Tag {
         return $tagList;
     }
 
+    /**
+     * @param $tag
+     * @throws \WeWorkApi\Utils\ParameterError
+     */
     static public function CheckTagCreateArgs($tag)
     {
         Utils::checkNotEmptyStr($tag->tagname, "tagname");
     }
 
+    /**
+     * @param $tag
+     * @throws \WeWorkApi\Utils\ParameterError
+     */
     static public function CheckTagUpdateArgs($tag)
     {
         Utils::checkIsUInt($tag->tagid, "tagid");
         Utils::checkNotEmptyStr($tag->tagname, "tagname");
     }
 
+    /**
+     * @param $tagId
+     * @param $userIdList
+     * @param $partyIdList
+     * @throws \WeWorkApi\Utils\ParameterError
+     * @throws QyApiError
+     */
     static public function CheckTagAddUserArgs($tagId, $userIdList, $partyIdList)
     {
         Utils::checkIsUInt($tagId, "tagid");

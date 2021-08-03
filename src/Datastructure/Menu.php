@@ -1,7 +1,9 @@
 <?php
 namespace WeWorkApi\DataStructure;
-include_once(__DIR__ . "/../../Utils/Utils.php");
-include_once(__DIR__ . "/../../Utils/error.inc.php");
+use WeWorkApi\Utils\Utils;
+
+include_once(__DIR__ . "/../Utils/Utils.php");
+include_once(__DIR__ . "/../Utils/Error.php");
 
 class Menu { 
     public $button = null; // xxxMenu array, 即各种子菜单array
@@ -86,7 +88,7 @@ class ClickMenu {
     public $name = null; // string
     public $key = null; // string
 
-	public function __construct($name=null, $key=null, $xxmenuArray=null)
+	public function __construct($name = null, $key = null)
 	{
         $this->name = $name;
         $this->key = $key;

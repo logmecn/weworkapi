@@ -1,9 +1,11 @@
 <?php
 namespace WeWorkApi\DataStructure;
 
+use WeWorkApi\Utils\ParameterError;
+use WeWorkApi\Utils\QyApiError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/../../Utils/Utils.php");
+include_once(__DIR__ . "/../Utils/Utils.php");
 
 class ExtattrItem
 {
@@ -88,21 +90,25 @@ class User
         return $retUserList;
 	}
 
+    /**
+     * @param $user
+     * @throws \WeWorkApi\Utils\ParameterError
+     */
     static public function CheckUserCreateArgs($user)
     {
         try {
             Utils::checkNotEmptyStr($user->userid, "userid");
-        } catch (\ParameterError $e) {
+        } catch (ParameterError $e) {
             echo $e->getMessage();
         }
         try {
             Utils::checkNotEmptyStr($user->name, "name");
-        } catch (\ParameterError $e) {
+        } catch (ParameterError $e) {
             echo $e->getMessage();
         }
         try {
             Utils::checkNotEmptyArray($user->department, "department");
-        } catch (\ParameterError $e) {
+        } catch (ParameterError $e) {
             echo $e->getMessage();
         }
     }
@@ -111,27 +117,31 @@ class User
     {
         try {
             Utils::checkNotEmptyStr($user->userid, "userid");
-        } catch (\ParameterError $e) {
+        } catch (ParameterError $e) {
             echo $e->getMessage();
         }
-    } 
+    }
 
+    /**
+     * @param $userIdList
+     * @throws QyApiError
+     */
     static public function CheckuserBatchDeleteArgs($userIdList)
     {
         try {
             Utils::checkNotEmptyArray($userIdList, "userid list");
-        } catch (\ParameterError $e) {
+        } catch (ParameterError $e) {
             echo $e->getMessage();
         }
         foreach ($userIdList as $userId) {
             try {
                 Utils::checkNotEmptyStr($userId, "userid");
-            } catch (\ParameterError $e) {
+            } catch (ParameterError $e) {
                 echo $e->getMessage();
             }
         }
         if (count($userIdList) > 200) {
-            throw QyApiError("no more than 200 userid once");
+            throw new QyApiError("no more than 200 userid once");
         }
     }
 

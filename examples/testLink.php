@@ -21,40 +21,42 @@ $config = require(__DIR__ . "/config_link.php");
 //use LinkAPI;
 //$config = require('./config.php');
 try {
-    $api = new LinkAPI($config['CORP_ID'], $config['CONTACT_SYNC_SECRET']);
+    $api = new LinkAPI($config['CORP_ID'], $config['APP_SECRET']);
 } catch (ParameterError $e) {
     echo $e->getMessage() . "\n";
 }
 
 try {
 
-    echo "获取应用的可见范围:";
-    $LinkGetPermList = $api->LinkGetPermList();
-    var_dump($LinkGetPermList);
+//    echo "获取应用的可见范围:";
+//    $LinkGetPermList = $api->LinkGetPermList();
+//    var_dump($LinkGetPermList);
 
-    echo '\n获取用户成员详细信息：';
-    $use_get = $api->Link_UserGet('ww5614ccf1c02e6d99/7086');
-    var_dump($use_get);
+//
+//    echo '\n获取用户成员详细信息：';
+//    $use_get = $api->Link_UserGet('YuanWenQiang');
+//    var_dump($use_get);
 
-    echo '\n获取互联企业部门成员:（需要在“可见范围加该部门可见，否则会提示
-    //Warning: wrong json format. user not in app perm!
-    ';
-    $simplelist = $api->Link_UserSimpleList('wh205582b532e12e3f/307');
-    var_dump($simplelist);
-
-    echo '\n获取互联企业部门成员详情:';
-    $userList = $api->Link_UserList('wh205582b532e12e3f/307');
-    var_dump($userList);
-
-    echo '\n获取互联企业部门列表:';
-    $dep_list = $api->Link_DepartmentList('wh205582b532e12e3f/307');
-    var_dump($dep_list);
+//    exit();
+//    echo '\n获取互联企业部门成员:（需要在“可见范围加该部门可见，否则会提示
+//    //Warning: wrong json format. user not in app perm!
+//    ';
+//    $simplelist = $api->Link_UserSimpleList('wh205582b532e12e3f/307');
+//    var_dump($simplelist);
+//
+//    echo '\n获取互联企业部门成员详情:';
+//    $userList = $api->Link_UserList('wh205582b532e12e3f/307');
+//    var_dump($userList);
+//
+//    echo '\n获取互联企业部门列表:';
+//    $dep_list = $api->Link_DepartmentList('wh205582b532e12e3f/307');
+//    var_dump($dep_list);
 
     echo '\n发送图文消息示例：';
     $message = new Link_Message();
     {
         //$message->sendToAll = false;
-        $message->touser = array('ww5614ccf1c02e6d99/7086', );
+        $message->touser = array('YuanWenQiang', );
 //                $message->toparty = array(1, 2, 1111, 3333);
 //                $message->totag= array(3, 4, 22233332, 33334444);
         $message->agentid = $config['APP_ID'];
