@@ -3,7 +3,7 @@
 use WeWorkApi\CorpAPI;
 use WeWorkApi\Utils\ParameterError;
 
-include_once("../src/Api/CorpAPI.php");
+include_once("../src/CorpAPI.php");
 //include_once("../src/api/ServiceCorpApi.php");
 //include_once("../src/api/ServiceProviderApi.php");
 

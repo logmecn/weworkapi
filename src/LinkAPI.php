@@ -3,12 +3,16 @@ namespace WeWorkApi;
 
 use WeWorkApi\DataStructure\Link_Message;
 use WeWorkApi\DataStructure\User;
+use WeWorkApi\Utils\HttpError;
+use WeWorkApi\Utils\NetWorkError;
 use WeWorkApi\Utils\ParameterError;
 use WeWorkApi\Utils\QyApiError;
+use WeWorkApi\Utils\SysError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/DataStructure/Link_Message.php");
 include_once("CorpAPI.php");
+include_once (__DIR__."/DataStructure/Link_Message.php");
+include_once (__DIR__."/Utils/Utils.php");
 
 class LinkAPI extends CorpAPI {
 
@@ -34,6 +38,9 @@ class LinkAPI extends CorpAPI {
      * @return array userids 示例："userids": ["CORPID/USERID"],
      * @throws ParameterError
      * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     public function LinkGetPermList(){
         self::_HttpCall(self::Link_Get_Perm_List, 'POST', '');
@@ -46,8 +53,11 @@ class LinkAPI extends CorpAPI {
      * @link https://work.weixin.qq.com/api/doc/90000/90135/93171
      * @param $userid : string
      * @return User : User
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function Link_UserGet($userid)
     {
@@ -64,8 +74,11 @@ class LinkAPI extends CorpAPI {
      * @param bool $fetchChild : true/false 是否递归获取子部门下面的成。（官方文档中不严谨，这里如果用0、1会提示json格式不正确。查了很久原因）
      *
      * @return array : User array
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function Link_UserSimpleList($department_id, $fetchChild=false)
     {
@@ -85,8 +98,11 @@ class LinkAPI extends CorpAPI {
      * @param bool $fetchChild : true/false  是否递归获取子部门下面的成员
      *
      * @return array
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function Link_UserList($departmentId, $fetchChild=false)
     {
@@ -102,8 +118,11 @@ class LinkAPI extends CorpAPI {
      * @param $departmentId : string, 该字段用的是互联应用可见范围接口返回的department_ids参数，用的是 linkedid + ’/‘ + department_id 拼成的字符串
      *
      * @return array : Department array
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function Link_DepartmentList($departmentId)
     {
@@ -124,8 +143,11 @@ class LinkAPI extends CorpAPI {
      * @param $invalidTagIdList : uint array
      *
      * @return void
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function Link_MessageSend(Link_Message $message, &$invalidUserIdList, &$invalidPartyIdList, &$invalidTagIdList)
     {
@@ -209,8 +231,11 @@ class LinkAPI extends CorpAPI {
      * "corp_name": "测试企业1"
      * "agentid": 1111
      * }]}
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function Corp_ListAppShareInfo($agentid)
     {
@@ -225,8 +250,11 @@ class LinkAPI extends CorpAPI {
      * @param string $corpid 已授权的下级企业corpid  注意是 "下级企业的corpid"
      * @param integer $agentid 已授权的 "下级" 企业 "应用ID"，不是当前企业的
      * @return array $share_info
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function Corp_GroupAccessToken($corpid, $agentid)
     {
@@ -241,8 +269,11 @@ class LinkAPI extends CorpAPI {
      * @param string $userid 通过code2Session接口获取到的加密的userid，不多于64字节
      * @param string $session_key 通过code2Session接口获取到的属于上级企业的会话密钥-不多于64字节
      * @return array
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function Corp_MinaSession($userid, $session_key)
     {

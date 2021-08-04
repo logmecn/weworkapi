@@ -11,22 +11,21 @@
  */
 namespace WeWorkApi\Api;
 use WeWorkApi\CorpAPI;
-use WeWorkApi\DataStructure\GetAdminListRsp;
-use WeWorkApi\DataStructure\GetAuthInfoRsp;
-use WeWorkApi\DataStructure\GetPermanentCodeRsp;
-use WeWorkApi\DataStructure\GetUserDetailBy3rdRsp;
-use WeWorkApi\DataStructure\GetUserinfoBy3rdRsp;
-use WeWorkApi\DataStructure\SetSessionInfoReq;
+use WeWorkApi\DataStructur\ServiceCorp\ServiceCorp\GetAuthInfoRsp;
+use WeWorkApi\DataStructure\ServiceCorp\GetAdminListRsp;
+use WeWorkApi\DataStructure\ServiceCorp\GetPermanentCodeRsp;
+use WeWorkApi\DataStructure\ServiceCorp\GetUserDetailBy3rdRsp;
+use WeWorkApi\DataStructure\ServiceCorp\GetUserinfoBy3rdRsp;
+use WeWorkApi\DataStructure\ServiceCorp\SetSessionInfoReq;
+use WeWorkApi\Utils\HttpError;
 use WeWorkApi\Utils\HttpUtils;
+use WeWorkApi\Utils\NetWorkError;
 use WeWorkApi\Utils\ParameterError;
 use WeWorkApi\Utils\QyApiError;
+use WeWorkApi\Utils\SysError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/../Utils/Utils.php");
-include_once(__DIR__ . "/../Utils/HttpUtils.php");
-include_once(__DIR__ . "/../Utils/Error.php");
-include_once(__DIR__ . "/../DataStructure/ServiceCorp.php");
-include_once(__DIR__ . "/API.php");
+include_once(__DIR__ . "/../CorpAPI.php");
 
 class ServiceCorpAPI extends CorpAPI 
 {
@@ -61,6 +60,9 @@ class ServiceCorpAPI extends CorpAPI
      * @return void : string
      * @throws ParameterError
      * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     protected function RefreshAccessToken()
     {
@@ -85,8 +87,11 @@ class ServiceCorpAPI extends CorpAPI
      * @note 调用者不用关心，本类会自动获取、更新
      *
      * @return  string
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     protected function GetSuiteAccessToken()
     { 
@@ -99,6 +104,9 @@ class ServiceCorpAPI extends CorpAPI
     /**
      * @throws ParameterError
      * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     protected function RefreshSuiteAccessToken()
     {
@@ -126,6 +134,9 @@ class ServiceCorpAPI extends CorpAPI
      * @link https://work.weixin.qq.com/api/doc#10975/获取预授权
      * @throws ParameterError
      * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     public function GetPreAuthCode()
     { 
@@ -141,6 +152,9 @@ class ServiceCorpAPI extends CorpAPI
      * @param SetSessionInfoReq $SetSessionInfoReq
      * @throws ParameterError
      * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     public function SetSessionInfo(SetSessionInfoReq $SetSessionInfoReq)
     { 
@@ -158,6 +172,9 @@ class ServiceCorpAPI extends CorpAPI
      * @return GetPermanentCodeRsp : GetPermanentCodeRsp
      * @throws ParameterError
      * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     public function GetPermanentCode($temp_auth_code)
     { 
@@ -177,6 +194,9 @@ class ServiceCorpAPI extends CorpAPI
      * @return GetAuthInfoRsp : GetAuthInfoRsp
      * @throws ParameterError
      * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     public function GetAuthInfo($auth_corpid, $permanent_code)
     { 
@@ -201,6 +221,9 @@ class ServiceCorpAPI extends CorpAPI
      * @return GetAdminListRsp : GetAdminListRsp
      * @throws ParameterError
      * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     public function GetAdminList($auth_corpid, $agentid)
     { 
@@ -224,6 +247,9 @@ class ServiceCorpAPI extends CorpAPI
      * @return GetUserinfoBy3rdRsp : GetUserinfoBy3rdRsp
      * @throws ParameterError
      * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     public function GetUserinfoBy3rd($code)
     { 
@@ -241,6 +267,9 @@ class ServiceCorpAPI extends CorpAPI
      * @return GetUserDetailBy3rdRsp : GetUserDetailBy3rdRsp
      * @throws ParameterError
      * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     public function GetUserDetailBy3rd($user_ticket)
     { 

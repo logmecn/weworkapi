@@ -1,14 +1,15 @@
 <?php
 namespace WeWorkApi\Api;
 //
+use WeWorkApi\Utils\HttpError;
 use WeWorkApi\Utils\HttpUtils;
+use WeWorkApi\Utils\NetWorkError;
 use WeWorkApi\Utils\ParameterError;
 use WeWorkApi\Utils\QyApiError;
+use WeWorkApi\Utils\SysError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/../Utils/Utils.php");
-include_once(__DIR__ . "/../Utils/HttpUtils.php");
-include_once(__DIR__ . "/../Utils/Error.php");
+include_once (__DIR__."/../Utils/Utils.php");
 
 abstract class API
 {
@@ -97,8 +98,11 @@ abstract class API
      * @param $url
      * @param $method
      * @param $args
-     * @throws QyApiError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     protected function _HttpCall($url, $method, $args)
     {
@@ -128,8 +132,11 @@ abstract class API
     /**
      * @param $url
      * @param bool $refreshTokenWhenExpired
-     * @return \WeWorkApi\Utils\http
+     * @return bool|string|null
      * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     protected function _HttpGetParseToJson($url, $refreshTokenWhenExpired=true)
     {
@@ -188,7 +195,10 @@ abstract class API
      * @param bool $refreshTokenWhenExpired
      * @param bool $isPostFile
      * @return mixed
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws QyApiError
+     * @throws SysError
      */
     protected function _HttpPostParseToJson($url, $args, $refreshTokenWhenExpired=true, $isPostFile=false)
     {

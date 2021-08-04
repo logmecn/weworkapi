@@ -1,6 +1,5 @@
 <?php
 namespace WeWorkApi\Utils;
-include_once(__DIR__."/Error.php");
 
 
 class HttpUtils

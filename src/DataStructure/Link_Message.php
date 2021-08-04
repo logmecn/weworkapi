@@ -3,7 +3,6 @@ namespace WeWorkApi\DataStructure;
 use WeWorkApi\Utils\QyApiError;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/../Utils/Error.php");
 include_once(__DIR__ . "/../Utils/Utils.php");
 
 class Link_Message

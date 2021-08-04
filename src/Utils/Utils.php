@@ -1,6 +1,13 @@
 <?php
 namespace WeWorkApi\Utils;
-include_once(__DIR__."/Error.php");
+
+include_once "HttpError.php";
+include_once "HttpUtils.php";
+include_once "NetWorkError.php";
+include_once "ParameterError.php";
+include_once "QyApiError.php";
+include_once "redisCache.php";
+include_once "SysError.php";
 
 class Utils { 
 

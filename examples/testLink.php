@@ -10,8 +10,9 @@
 
 //use WeWorkApi\CorpAPI;
 use WeWorkApi\DataStructure\Link_Message;
-use WeWorkApi\DataStructure\NewsArticle;
-use WeWorkApi\DataStructure\NewsMessageContent;
+use WeWorkApi\DataStructure\Message\NewsArticle;
+use WeWorkApi\DataStructure\Message\NewsMessageContent;
+
 use WeWorkApi\LinkAPI;
 use WeWorkApi\Utils\ParameterError;
 
@@ -36,7 +37,7 @@ try {
 //    echo '\n获取用户成员详细信息：';
 //    $use_get = $api->Link_UserGet('YuanWenQiang');
 //    var_dump($use_get);
-
+//
 //    exit();
 //    echo '\n获取互联企业部门成员:（需要在“可见范围加该部门可见，否则会提示
 //    //Warning: wrong json format. user not in app perm!

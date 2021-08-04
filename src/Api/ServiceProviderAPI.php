@@ -10,21 +10,21 @@
  *
  */
 namespace WeWorkApi\Api;
-use WeWorkApi\DataStructure\GetLoginInfoRsp;
-use WeWorkApi\DataStructure\GetRegisterCodeReq;
-use WeWorkApi\DataStructure\GetRegisterInfoRsp;
-use WeWorkApi\DataStructure\SetAgentScopeReq;
-use WeWorkApi\DataStructure\SetAgentScopeRsp;
+use WeWorkApi\DataStructure\ServiceProvider\GetLoginInfoRsp;
+use WeWorkApi\DataStructure\ServiceProvider\GetRegisterCodeReq;
+use WeWorkApi\DataStructure\ServiceProvider\GetRegisterInfoRsp;
+use WeWorkApi\DataStructure\ServiceProvider\SetAgentScopeReq;
+use WeWorkApi\DataStructure\ServiceProvider\SetAgentScopeRsp;
+use WeWorkApi\Utils\HttpError;
 use WeWorkApi\Utils\HttpUtils;
+use WeWorkApi\Utils\NetWorkError;
 use WeWorkApi\Utils\ParameterError;
 use WeWorkApi\Utils\QyApiError;
+use WeWorkApi\Utils\SysError;
 use WeWorkApi\Utils\Utils;
 
 include_once(__DIR__ . "/../Utils/Utils.php");
 include_once(__DIR__ . "/../Utils/HttpUtils.php");
-include_once(__DIR__ . "/../Utils/Error.php");
-
-include_once(__DIR__ . "/../DataStructure/ServiceProvider.php");
 
 class ServiceProviderAPI extends API
 {
@@ -45,8 +45,11 @@ class ServiceProviderAPI extends API
 
     /**
      * @return void|null
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     protected function GetProviderAccessToken()
     { 
@@ -59,6 +62,9 @@ class ServiceProviderAPI extends API
     /**
      * @throws ParameterError
      * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
      */
     protected function RefreshProviderAccessToken()
     {
@@ -87,8 +93,11 @@ class ServiceProviderAPI extends API
      * @param $auth_code : string
      *
      * @return GetLoginInfoRsp : GetLoginInfoRsp
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function GetLoginInfo($auth_code)
     { 
@@ -108,8 +117,11 @@ class ServiceProviderAPI extends API
      * @param GetRegisterCodeReq $GetRegisterCodeReq
      *
      * @return string register_code
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function GetRegisterCode(GetRegisterCodeReq $GetRegisterCodeReq)
     { 
@@ -126,8 +138,11 @@ class ServiceProviderAPI extends API
      * @param $register_code : string
      *
      * @return GetRegisterInfoRsp : GetRegisterInfoRsp
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function GetRegisterInfo($register_code)
     { 
@@ -146,8 +161,11 @@ class ServiceProviderAPI extends API
      * @param SetAgentScopeReq $SetAgentScopeReq : SetAgentScopeReq
      *
      * @return SetAgentScopeRsp : SetAgentScopeRsp
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function SetAgentScope($access_token, SetAgentScopeReq $SetAgentScopeReq)
     { 
@@ -162,8 +180,11 @@ class ServiceProviderAPI extends API
      * @link https://work.weixin.qq.com/api/doc#11729/设置通讯录同步完成
      *
      * @param $access_token : 该接口只能使用注册完成回调事件或者查询注册状态返回的access_token
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function SetContactSyncSuccess($access_token)
     { 

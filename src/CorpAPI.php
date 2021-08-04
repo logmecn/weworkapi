@@ -5,9 +5,6 @@ namespace WeWorkApi;
  *   
  * @File CorpAPI.php
  * @Brief : 为企业开放的接口
- * @Author abelzhu, abelzhu@tencent.com
- * @Version 1.0
- * @Date 2017-12-26
      */
 use CURLFile;
 use Exception;
@@ -23,11 +20,11 @@ use WeWorkApi\DataStructure\CheckinDataList;
 use WeWorkApi\DataStructure\CheckinOption;
 use WeWorkApi\DataStructure\Department;
 use WeWorkApi\DataStructure\Menu;
-use WeWorkApi\DataStructure\Message;
-use WeWorkApi\DataStructure\PayWwSptrans2PocketReq;
-use WeWorkApi\DataStructure\QueryWorkWxRedpackReq;
-use WeWorkApi\DataStructure\QueryWwSptrans2PocketReq;
-use WeWorkApi\DataStructure\SendWorkWxRedpackReq;
+use WeWorkApi\DataStructure\Message\Message;
+use WeWorkApi\DataStructure\Pay\PayWwSptrans2PocketReq;
+use WeWorkApi\DataStructure\Pay\QueryWorkWxRedpackReq;
+use WeWorkApi\DataStructure\Pay\QueryWwSptrans2PocketReq;
+use WeWorkApi\DataStructure\Pay\SendWorkWxRedpackReq;
 use WeWorkApi\DataStructure\Tag;
 use WeWorkApi\DataStructure\User;
 use WeWorkApi\DataStructure\UserDetailByUserTicket;
@@ -41,23 +38,29 @@ use WeWorkApi\Utils\redisCache;
 use WeWorkApi\Utils\SysError;
 use WeWorkApi\Utils\Utils;
 
-include_once "Api\API.php";
+include_once (__DIR__. "/Api/API.php");
 include_once(__DIR__ . "/Utils/Utils.php");
 include_once(__DIR__ . "/Utils/HttpUtils.php");
-include_once(__DIR__ . "/Utils/Error.php");
+include_once(__DIR__ . "/Utils/HttpError.php");
+include_once(__DIR__ . "/Utils/NetWorkError.php");
+include_once(__DIR__ . "/Utils/ParameterError.php");
+include_once(__DIR__ . "/Utils/QyApiError.php");
+include_once(__DIR__ . "/Utils/SysError.php");
+include_once(__DIR__ . "/Utils/redisCache.php");
 include_once(__DIR__ . "/DataStructure/User.php");
 include_once(__DIR__ . "/DataStructure/Department.php");
 include_once(__DIR__ . "/DataStructure/Tag.php");
 include_once(__DIR__ . "/DataStructure/Batch.php");
 include_once(__DIR__ . "/DataStructure/Agent.php");
 include_once(__DIR__ . "/DataStructure/Menu.php");
-include_once(__DIR__ . "/DataStructure/Message.php");
-include_once(__DIR__ . "/DataStructure/Oauth.php");
+include_once(__DIR__ . "/DataStructure/Message/Message.php");
+include_once(__DIR__ . "/DataStructure/UserInfoByCode.php");
+include_once(__DIR__ . "/DataStructure/UserDetailByUserTicket.php");
 include_once(__DIR__ . "/DataStructure/CheckinOption.php");
 include_once(__DIR__ . "/DataStructure/CheckinData.php");
 include_once(__DIR__ . "/DataStructure/ApprovalData.php");
-include_once(__DIR__ . "/DataStructure/Pay.php");
-include_once(__DIR__ . "/DataStructure/Invoice.php");
+include_once(__DIR__ . "/DataStructure/Pay/Pay.php");
+include_once(__DIR__ . "/DataStructure/Invoice/Invoice.php");
 
 /**
  * Class CorpAPI
@@ -91,6 +94,12 @@ class CorpAPI extends API
 
     // ------------------------- access token ---------------------------------
     //刷新access_token，改造原来的方式
+    /**
+     * @return mixed|string|null
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws SysError
+     */
     private function getAccessTokenFromRedis()
     {
         $redis = new redisCache($this->redisConfig);
@@ -121,8 +130,11 @@ class CorpAPI extends API
     /**
      * @brief GetAccessToken : 获取 accesstoken，不用主动调用
      * @return null : string accessToken
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     protected function GetAccessToken()
     {
@@ -136,8 +148,11 @@ class CorpAPI extends API
     }
 
     /**
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     protected function RefreshAccessToken()
     {
@@ -162,8 +177,11 @@ class CorpAPI extends API
      * @brief UserCreate : 创建成员
      * @link https://work.weixin.qq.com/api/doc#10018
      * @param User $user : User
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function UserCreate(User $user)
     {
@@ -177,8 +195,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10019
      * @param $userid : string
      * @return User : User
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function UserGet($userid)
     {
@@ -190,9 +211,12 @@ class CorpAPI extends API
     /**
      * @brief UserUpdate : 更新成员
      * @link https://work.weixin.qq.com/api/doc#10020
-     * @param $user : User
-     * @throws QyApiError
+     * @param User $user : User
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function UserUpdate(User $user)
     {
@@ -205,8 +229,11 @@ class CorpAPI extends API
      * @brief UserDelete : 删除成员
      * @link https://work.weixin.qq.com/api/doc#10030
      * @param $userid : string
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function UserDelete($userid)
     {
@@ -218,8 +245,11 @@ class CorpAPI extends API
      * @brief UserBatchDelete : 批量删除成员
      * @link https://work.weixin.qq.com/api/doc#10060
      * @param array $userIdList : string array
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function UserBatchDelete(array $userIdList)
     {
@@ -234,8 +264,11 @@ class CorpAPI extends API
      * @param $department_id
      * @param $fetchChild : 1/0 是否递归获取子部门下面的成员
      * @return array : User array
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function UserSimpleList($department_id, $fetchChild)
     {
@@ -250,8 +283,11 @@ class CorpAPI extends API
      * @param $departmentId : uint
      * @param $fetchChild : 1/0 是否递归获取子部门下面的成员
      * @return array
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function UserList($departmentId, $fetchChild)
     {
@@ -267,8 +303,11 @@ class CorpAPI extends API
      * @param $openId : output string
      * @param $agentid : intput string
      * @param $appId : output string
-     * @throws ParameterError*@throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws ParameterError *@throws QyApiError
      * @throws QyApiError
+     * @throws SysError
      */
     public function UserId2OpenId($userid, &$openId, $agentid = null, &$appId = null)
     {
@@ -288,8 +327,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#11279
      * @param $openId : intput string
      * @param $userid : output string
-     * @throws ParameterError*@throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws ParameterError *@throws QyApiError
      * @throws QyApiError
+     * @throws SysError
      */
     public function openId2UserId($openId, &$userid)
     {
@@ -303,8 +345,11 @@ class CorpAPI extends API
      * @brief UserAuthSuccess : 二次验证
      * @link https://work.weixin.qq.com/api/doc#11378
      * @param $userid : string
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function UserAuthSuccess($userid)
     {
@@ -318,8 +363,11 @@ class CorpAPI extends API
      * @brief DepartmentCreate : 创建部门* @link https://work.weixin.qq.com/api/doc#10076
      * @param Department $department : Department
      * @return mixed|null : uint departmentId
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function DepartmentCreate(Department $department)
     {
@@ -332,8 +380,11 @@ class CorpAPI extends API
     /**
      * @brief DepartmentUpdate : 更新部门* @link https://work.weixin.qq.com/api/doc#10077
      * @param Department $department : Department
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function DepartmentUpdate(Department $department)
     {
@@ -345,8 +396,11 @@ class CorpAPI extends API
     /**
      * @brief DepartmentDelete : 删除部门* @link https://work.weixin.qq.com/api/doc#10079
      * @param $departmentId : uint
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function DepartmentDelete($departmentId)
     {
@@ -359,8 +413,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10093
      * @param $departmentId : uint, 如果不填，默认获取全量组织架构
      * @return array : Department array
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function DepartmentList($departmentId = null)
     { 
@@ -376,8 +433,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10915
      * @param Tag $tag : Tag
      * @return mixed|null : uint tagid
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function TagCreate(Tag $tag)
     {
@@ -391,8 +451,11 @@ class CorpAPI extends API
      * @brief TagUpdate : 更新标签名字
      * @link https://work.weixin.qq.com/api/doc#10919
      * @param Tag $tag : Tag
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function TagUpdate(Tag $tag)
     {
@@ -405,8 +468,11 @@ class CorpAPI extends API
      * @brief TagDelete : 删除标签
      * @link https://work.weixin.qq.com/api/doc#10920
      * @param $tagid : uint
-     * @throws ParameterError*@throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws ParameterError *@throws QyApiError
      * @throws QyApiError
+     * @throws SysError
      */
     public function TagDelete($tagid)
     {
@@ -419,8 +485,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10921
      * @param $tagid : uint
      * @return Tag : Tag
-     * @throws ParameterError*@throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws ParameterError *@throws QyApiError
      * @throws QyApiError
+     * @throws SysError
      */
     public function TagGetUser($tagid)
     {
@@ -437,10 +506,13 @@ class CorpAPI extends API
      * @param array $partyIdList : uint array
      * @param &$invalidUserIdList : output string array
      * @param &$invalidPartyIdList : output uint array
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      * @note 1: userIdList/partyIdList 不能同时为空
      * @note 2: 如果存在不合法的 userid/partyid, 不会throw Exception，但是会填充invalidUserIdList/invalidPartyIdList
-     * @throws QyApiError
-     * @throws ParameterError
      */
     public function TagAddUser($tagid, array $userIdList, array $partyIdList, &$invalidUserIdList, &$invalidPartyIdList)
     {
@@ -462,10 +534,13 @@ class CorpAPI extends API
      * @param $partyIdList : uint array
      * @param &$invalidUserIdList : output string array
      * @param &$invalidPartyIdList : output uint array
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      * @note 1: userIdList/partyIdList 不能同时为空
      * @note 2: 如果存在不合法的 userid/partyid, 不会throw Exception，但是会填充invalidUserIdList/invalidPartyIdList
-     * @throws QyApiError
-     * @throws ParameterError
      */
     public function TagDeleteUser($tagid, $userIdList, $partyIdList, &$invalidUserIdList, &$invalidPartyIdList)
     {
@@ -483,8 +558,11 @@ class CorpAPI extends API
      * @brief TagGetList : 获取标签列表
      * @link https://work.weixin.qq.com/api/doc#10926
      * @return array : Tag array
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function TagGetList()
     {
@@ -500,8 +578,11 @@ class CorpAPI extends API
      * @param BatchJobArgs $batchJobArgs
      * @param $jobType
      * @return mixed|null
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     private function BatchJob(BatchJobArgs $batchJobArgs, $jobType)
     {
@@ -521,8 +602,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10138/增量更新成员
      * @param BatchJobArgs $batchJobArgs : BatchJobArgs
      * @return mixed|null : string jobid
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function BatchSyncUser(BatchJobArgs $batchJobArgs)
     {
@@ -534,8 +618,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10138/全量覆盖成员
      * @param BatchJobArgs $batchJobArgs : BatchJobArgs
      * @return mixed|null : string jobid
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function BatchReplaceUser(BatchJobArgs $batchJobArgs)
     {
@@ -547,8 +634,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10138/全量覆盖部门
      * @param BatchJobArgs $batchJobArgs : BatchJobArgs
      * @return mixed|null : string jobid
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function BatchReplaceParty(BatchJobArgs $batchJobArgs)
     {
@@ -560,8 +650,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10138/获取异步任务结果
      * @param $jobId : string
      * @return BatchJobResult : BatchJobResult
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function BatchJobGetResult($jobId)
     {
@@ -581,8 +674,11 @@ class CorpAPI extends API
      * @param $invalidUserIdList : output string array
      * @param $invalidPartyIdList : output uint array
      * @param $invalidTagIdList : output uint array
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function BatchInvite(
         $userIdList=null, $partyIdList=null, $tagIdList=null,
@@ -608,8 +704,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10087
      * @param $agentid : string
      * @return Agent : Agent
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function AgentGet($agentid)
     {
@@ -621,8 +720,11 @@ class CorpAPI extends API
      * @brief AgentSet : 设置应用
      * @link https://work.weixin.qq.com/api/doc#10088
      * @param $agent : Agent
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function AgentSet($agent)
     {
@@ -635,8 +737,11 @@ class CorpAPI extends API
      * @brief AgentList : 获取应用列表
      * @link https://work.weixin.qq.com/api/doc#11214
      * @return array : AgentList
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function AgentGetList()
     {
@@ -653,8 +758,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10786
      * @param $agentid : uint
      * @param Menu $menu : Menu
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function MenuCreate($agentid, Menu $menu)
     {
@@ -668,8 +776,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10787
      * @param $agentid : string
      * @return Menu : Menu
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function MenuGet($agentid)
     {
@@ -681,8 +792,11 @@ class CorpAPI extends API
      * @brief MenuGet : 删除菜单
      * @link https://work.weixin.qq.com/api/doc#10788
      * @param $agentid : string
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function MenuDelete($agentid)
     {
@@ -701,8 +815,11 @@ class CorpAPI extends API
      * @param $invalidPartyIdList : uint array
      * @param $invalidTagIdList : uint array
      * @return void
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function MessageSend(Message $message, &$invalidUserIdList, &$invalidPartyIdList, &$invalidTagIdList)
     {
@@ -733,11 +850,14 @@ class CorpAPI extends API
     /**
      * @brief MediaUpload : 上传临时素材
      * @link https://work.weixin.qq.com/api/doc#10112
-     * @param  string $filePath :, 文件路径
-     * @param string $type  , 媒体文件类型，分别有图片（image）、语音（voice）、视频（video），普通文件（file）
+     * @param string $filePath :, 文件路径
+     * @param string $type , 媒体文件类型，分别有图片（image）、语音（voice）、视频（video），普通文件（file）
      * @return string media_id
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError *@throws QyApiError
      * @throws QyApiError
+     * @throws SysError
      */
     public function MediaUpload($filePath, $type)
     {
@@ -789,8 +909,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10115
      * @param $media_id : string
      * @return null : string
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function MediaGet($media_id)
     {
@@ -804,10 +927,13 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#13219
      * @param $filePath : string, 图片文件路径
      * @param $md5 : string, 图片文件的md5.可以不填
-     * @return  : string。上传图片后，得到的图片永久
+     * @return string : 图片url。上传图片后，得到的图片永久
      * URL。注意仅能用于图文消息（mpnews）正文中的图片展示
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function UploadImage($filePath, $md5=null)
     {
@@ -845,8 +971,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10028/根据code获取成员信息
      * @param $code : string
      * @return UserInfoByCode : UserInfoByCode
-     * @throws ParameterError*@throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws ParameterError *@throws QyApiError
      * @throws QyApiError
+     * @throws SysError
      */
     public function GetUserInfoByCode($code)
     {
@@ -860,8 +989,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#10028/使用user_ticket获取成员详情
      * @param $ticket : string
      * @return null : UserDetailByUserTicket
-     * @throws ParameterError*@throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
+     * @throws ParameterError *@throws QyApiError
      * @throws QyApiError
+     * @throws SysError
      */
     public function GetUserDetailByUserTicket($ticket)
     {
@@ -878,8 +1010,12 @@ class CorpAPI extends API
     /**
      * @brief TicketGet : 获取电子发票ticket
      * @link https://work.weixin.qq.com/api/doc#10029/获取电子发票ticket
-     * @throws QyApiError
+
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function TicketGet()
     {
@@ -890,8 +1026,11 @@ class CorpAPI extends API
     /**
      * @brief JsApiTicketGet : 获取jsapi_ticket
      * @link https://work.weixin.qq.com/api/doc#10029/获取jsapi_ticket
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function JsApiTicketGet()
     {
@@ -924,8 +1063,11 @@ class CorpAPI extends API
      * @param $datetime : uint
      * @param $useridlist : string array
      * @return CheckinOption : CheckinOption
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function CheckinOptionGet($datetime, $useridlist)
     { 
@@ -947,8 +1089,11 @@ class CorpAPI extends API
      * @param $endtime : uint
      * @param $useridlist : string array
      * @return CheckinDataList : CheckinDataList
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function CheckinDataGet($opencheckindatatype, $starttime, $endtime, $useridlist)
     { 
@@ -975,8 +1120,11 @@ class CorpAPI extends API
      * @param $endtime : uint
      * @param $next_spnum : uint
      * @return ApprovalDataList : ApprovalDataList
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function ApprovalDataGet($starttime, $endtime, $next_spnum=null)
     { 
@@ -1111,8 +1259,11 @@ class CorpAPI extends API
      * @param $card_id : string
      * @param $encrypt_code : string
      * @return object : InvoiceInfo
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function GetInvoiceInfo($card_id, $encrypt_code)
     { 
@@ -1130,8 +1281,11 @@ class CorpAPI extends API
      * @param $encrypt_code : string
      * @param $reimburse_status : string
      * @return void
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
      * @throws QyApiError
+     * @throws SysError
      */
     public function UpdateInvoiceStatus($card_id, $encrypt_code, $reimburse_status)
     { 
@@ -1146,8 +1300,11 @@ class CorpAPI extends API
      * @brief BatchUpdateInvoiceStatus : 批量更新发票状态
      * @link https://work.weixin.qq.com/api/doc#11634
      * @param BatchUpdateInvoiceStatusReq $BatchUpdateInvoiceStatusReq
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function BatchUpdateInvoiceStatus(BatchUpdateInvoiceStatusReq $BatchUpdateInvoiceStatusReq)
     { 
@@ -1160,8 +1317,11 @@ class CorpAPI extends API
      * @link https://work.weixin.qq.com/api/doc#11974
      * @param BatchGetInvoiceInfoReq $BatchGetInvoiceInfoReq
      * @return object : BatchGetInvoiceInfoRsp
-     * @throws QyApiError
+     * @throws HttpError
+     * @throws NetWorkError
      * @throws ParameterError
+     * @throws QyApiError
+     * @throws SysError
      */
     public function BatchGetInvoiceInfo(BatchGetInvoiceInfoReq $BatchGetInvoiceInfoReq)
     { 

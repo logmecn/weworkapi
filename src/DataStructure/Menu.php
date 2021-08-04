@@ -2,8 +2,6 @@
 namespace WeWorkApi\DataStructure;
 use WeWorkApi\Utils\Utils;
 
-include_once(__DIR__ . "/../Utils/Utils.php");
-include_once(__DIR__ . "/../Utils/Error.php");
 
 class Menu { 
     public $button = null; // xxxMenu array, 即各种子菜单array
