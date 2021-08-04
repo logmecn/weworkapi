@@ -1,5 +1,5 @@
 <?php
-namespace WeWorkApi\DataStructure;
+namespace WeWorkApi\DataStructure\Invoice;
 
 //use WeWorkApi\Utils\Utils;
 //include_once(__DIR__ . "/../Utils/Utils.php");

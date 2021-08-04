@@ -1,5 +1,5 @@
 <?php
-namespace WeWorkApi\DataStructur\ServiceCorp\ServiceCorp;
+namespace WeWorkApi\DataStructure\ServiceCorp;
 
 use WeWorkApi\DataStructure\ServiceCorp\AuthCorpInfo;
 use WeWorkApi\DataStructure\ServiceCorp\AuthInfo;

@@ -1,5 +1,5 @@
 <?php
-namespace WeWorkApi\DataStructure;
+namespace WeWorkApi\DataStructure\Invoice;
 
 class BatchGetInvoiceInfoReq
 {
